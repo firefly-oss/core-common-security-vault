@@ -101,16 +101,18 @@ firefly:
         algorithm: AES-256-GCM
         # Hexagonal Architecture: Provider selection
         # Options: IN_MEMORY, AWS_KMS, AZURE_KEY_VAULT, HASHICORP_VAULT, GOOGLE_CLOUD_KMS
-        provider: IN_MEMORY
-        master-key-id: default-master-key
+        provider: AWS_KMS
+        master-key-id: alias/vault-kms-001
         envelope-encryption: false
 
         # Legacy property for backward compatibility
-        kms-provider: IN_MEMORY
         aws-kms:
-          region: us-east-1
-          key-arn: ${AWS_KMS_KEY_ARN:}
+          region: eu-west-1
+          key-arn: ${AWS_KMS_KEY_ARN:arn:aws:kms:eu-west-1:013517327415:key/c115957c-5d87-42a9-ae3f-59dc83ad4601}
           endpoint: ${AWS_KMS_ENDPOINT:}
+          access-key: ${AWS_ACCESS_KEY_ID:}
+          secret-key: ${AWS_SECRET_ACCESS_KEY:}
+          access-token: ${AWS_SESSION_TOKEN:}
         azure-key-vault:
           vault-url: ${AZURE_VAULT_URL:}
           key-name: ${AZURE_KEY_NAME:}

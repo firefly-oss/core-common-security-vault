@@ -102,9 +102,9 @@ firefly:
         aws-kms:
           # AWS region (required)
           region: us-east-1
-          
+
           # Endpoint override (optional, for testing with LocalStack)
-          # endpoint-override: http://localhost:4566
+          # endpoint: http://localhost:4566
 ```
 
 ### Environment Variables
@@ -172,20 +172,21 @@ firefly:
       encryption:
         provider: AWS_KMS
         master-key-id: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        
+
         aws-kms:
           # AWS region (required)
           region: us-east-1
-          
-          # Endpoint override (optional)
-          # Use for LocalStack or custom endpoints
-          endpoint-override: http://localhost:4566
-          
-          # Connection timeout in seconds (optional, default: 30)
-          connection-timeout: 30
-          
-          # Request timeout in seconds (optional, default: 60)
-          request-timeout: 60
+
+          # KMS key ARN (optional, can use master-key-id instead)
+          key-arn: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+
+          # Endpoint override (optional, for LocalStack or custom endpoints)
+          endpoint: http://localhost:4566
+
+          # AWS credentials (optional, prefer IAM roles instead)
+          access-key: ${AWS_ACCESS_KEY_ID}
+          secret-key: ${AWS_SECRET_ACCESS_KEY}
+          access-token: ${AWS_SESSION_TOKEN}
 ```
 
 ## Features
@@ -251,7 +252,7 @@ Test with LocalStack for local development:
        vault:
          encryption:
            aws-kms:
-             endpoint-override: http://localhost:4566
+             endpoint: http://localhost:4566
    ```
 
 ## Monitoring

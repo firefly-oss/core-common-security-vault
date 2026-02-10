@@ -81,7 +81,6 @@ public class CredentialAuditService {
         
         return Mono.fromCallable(() -> {
             CredentialAccessLog accessLog = CredentialAccessLog.builder()
-                .id(UUID.randomUUID())
                 .credentialId(credentialId)
                 .accessType(accessType)
                 .accessedBy(accessedBy)

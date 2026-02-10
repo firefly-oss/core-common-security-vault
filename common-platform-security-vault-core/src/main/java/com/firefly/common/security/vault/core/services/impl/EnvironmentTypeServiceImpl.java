@@ -17,8 +17,8 @@
 
 package com.firefly.common.security.vault.core.services.impl;
 
-import com.firefly.common.core.filters.FilterRequest;
-import com.firefly.common.core.queries.PaginationResponse;
+import org.fireflyframework.core.filters.FilterRequest;
+import org.fireflyframework.core.queries.PaginationResponse;
 import com.firefly.common.security.vault.core.mappers.EnvironmentTypeMapper;
 import com.firefly.common.security.vault.core.services.EnvironmentTypeService;
 import com.firefly.common.security.vault.interfaces.dtos.EnvironmentTypeDTO;

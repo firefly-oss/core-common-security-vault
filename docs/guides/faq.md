@@ -10,29 +10,29 @@ Firefly Security Vault is an enterprise-grade credential management system built
 
 Environment variables have several limitations:
 
-- ❌ No encryption at rest
-- ❌ No audit trail
-- ❌ No rotation capabilities
-- ❌ Visible in process listings
-- ❌ No access control
+- No encryption at rest
+- No audit trail
+- No rotation capabilities
+- Visible in process listings
+- No access control
 
 Firefly Security Vault provides:
 
-- ✅ AES-256-GCM encryption
-- ✅ Complete audit logs
-- ✅ Automatic rotation
-- ✅ Secure storage
-- ✅ Role-based access control
+- AES-256-GCM encryption
+- Complete audit logs
+- Automatic rotation
+- Secure storage
+- Role-based access control
 
 ### Is it production-ready?
 
 Yes! The Firefly Security Vault is production-ready with:
 
-- ✅ 5 KMS providers (AWS, Azure, Google Cloud, HashiCorp, In-Memory)
-- ✅ Resilience patterns (Circuit Breaker, Rate Limiter, Retry)
-- ✅ Health checks and metrics
-- ✅ Comprehensive test coverage
-- ✅ Production-grade encryption
+- 5 KMS providers (AWS, Azure, Google Cloud, HashiCorp, In-Memory)
+- Resilience patterns (Circuit Breaker, Rate Limiter, Retry)
+- Health checks and metrics
+- Comprehensive test coverage
+- Production-grade encryption
 
 ## Architecture Questions
 
@@ -94,10 +94,10 @@ Choose based on your deployment environment:
 
 **No!** IN_MEMORY is only for development and testing:
 
-- ❌ Keys lost on restart
-- ❌ No persistence
-- ❌ No high availability
-- ❌ No audit trail
+- Keys lost on restart
+- No persistence
+- No high availability
+- No audit trail
 
 Use a production KMS provider (AWS KMS, Azure Key Vault, etc.)
 
@@ -149,15 +149,7 @@ The system uses resilience patterns:
 - **Retry**: Retries with exponential backoff
 - **Rate Limiter**: Prevents overwhelming the KMS
 
-Configure in `application.yaml`:
-
-```yaml
-firefly:
-  security:
-    vault:
-      resilience:
-        enabled: true
-```
+Resilience patterns are configured in the `ResilienceConfiguration` bean in the `core` module with sensible defaults (50% failure rate threshold for Circuit Breaker, 100 calls/second Rate Limiter, 3 retry attempts with exponential backoff).
 
 ### How often should I rotate credentials?
 
@@ -172,9 +164,9 @@ Enable automatic rotation:
 firefly:
   security:
     vault:
-      encryption:
+      rotation:
         auto-rotation-enabled: true
-        rotation-interval-days: 90
+        default-rotation-days: 90
 ```
 
 ## Operations Questions
@@ -244,16 +236,17 @@ With default configuration:
 - **Recommended**: 3-5 instances for high availability
 - **Total Capacity**: 300-500 requests/second
 
-Adjust rate limiter for higher throughput:
+Adjust the web-layer rate limiter for higher throughput:
 
 ```yaml
 firefly:
   security:
     vault:
-      resilience:
-        rate-limiter:
-          limit-for-period: 200
+      access-control:
+        rate-limit-per-minute: 200
 ```
+
+Note: The Resilience4j rate limiter for KMS operations (100 calls/second) is configured in `ResilienceConfiguration` and is separate from the web-layer rate limiter.
 
 ### Does it cache credentials?
 
@@ -418,9 +411,9 @@ See [Development Guide](../development/README.md) for details.
 
 ## Still Have Questions?
 
-- 📖 [Documentation](../README.md)
-- 🐛 [GitHub Issues](https://github.com/firefly-oss/common-platform-security-vault/issues)
-- 💬 [Discussions](https://github.com/firefly-oss/common-platform-security-vault/discussions)
-- 📧 [Email Support](mailto:dev@getfirefly.io)
-- 🌐 [Website](https://getfirefly.io)
+- [Documentation](../README.md)
+- [GitHub Issues](https://github.com/firefly-oss/common-platform-security-vault/issues)
+- [Discussions](https://github.com/firefly-oss/common-platform-security-vault/discussions)
+- [Email Support](mailto:dev@getfirefly.io)
+- [Website](https://getfirefly.io)
 

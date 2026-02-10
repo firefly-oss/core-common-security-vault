@@ -6,7 +6,7 @@ This guide will help you get the Firefly Security Vault up and running quickly.
 
 ## Prerequisites
 
-- Java 21 or higher
+- Java 25 or higher
 - Maven 3.8+
 - PostgreSQL 14+ (or use H2 for testing)
 - Git

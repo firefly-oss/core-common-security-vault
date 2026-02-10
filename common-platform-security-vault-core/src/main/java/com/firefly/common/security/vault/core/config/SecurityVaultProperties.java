@@ -104,6 +104,9 @@ public class SecurityVaultProperties {
         private String region = "us-east-1";
         private String keyArn;
         private String endpoint; // For LocalStack or custom endpoints
+        private String accessKey;
+        private String secretKey;
+        private String accessToken;
     }
 
     @Data

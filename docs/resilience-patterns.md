@@ -37,7 +37,7 @@ Attempt 1: Fails with network timeout
 Wait 1 second...
 Attempt 2: Fails with network timeout
 Wait 2 seconds...
-Attempt 3: Succeeds ✓
+Attempt 3: Succeeds 
 ```
 
 ### 2. Circuit Breaker Pattern
@@ -211,33 +211,18 @@ For real retry behavior testing, use integration tests with actual KMS providers
 4. **Set Appropriate Timeouts**: Balance between user experience and retry attempts
 5. **Test Failure Scenarios**: Regularly test circuit breaker and retry behavior
 
-## Configuration Properties
+## Configuration
 
-You can customize resilience patterns through application properties:
+Resilience patterns are configured programmatically in `ResilienceConfiguration.java` with hardcoded values. They are **not** configurable via `application.yaml` properties.
 
-```yaml
-resilience4j:
-  retry:
-    instances:
-      kms-operations:
-        max-attempts: 3
-        wait-duration: 1s
-        exponential-backoff-multiplier: 2.0
-        
-  circuitbreaker:
-    instances:
-      kms-operations:
-        failure-rate-threshold: 50
-        wait-duration-in-open-state: 60s
-        sliding-window-size: 10
-        
-  ratelimiter:
-    instances:
-      kms-operations:
-        limit-for-period: 100
-        limit-refresh-period: 1s
-        timeout-duration: 5s
-```
+The beans are created with `@Qualifier` annotations for the `kms-operations` instance:
+
+- `kmsCircuitBreakerRegistry` / `kmsCircuitBreaker`
+- `kmsRateLimiterRegistry` / `kmsRateLimiter`
+- `kmsRetryRegistry` / `kmsRetry`
+
+To customize these values, modify the `ResilienceConfiguration` class in the `core` module:
+`common-platform-security-vault-core/src/main/java/com/firefly/common/security/vault/core/config/ResilienceConfiguration.java`
 
 ## Troubleshooting
 

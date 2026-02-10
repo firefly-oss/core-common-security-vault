@@ -18,8 +18,8 @@
 package com.firefly.common.security.vault.core.services;
 
 import com.firefly.common.security.vault.interfaces.dtos.EncryptionKeyDTO;
-import com.firefly.common.core.filters.FilterRequest;
-import com.firefly.common.core.queries.PaginationResponse;
+import org.fireflyframework.core.filters.FilterRequest;
+import org.fireflyframework.core.queries.PaginationResponse;
 import reactor.core.publisher.Mono;
 import java.util.UUID;
 

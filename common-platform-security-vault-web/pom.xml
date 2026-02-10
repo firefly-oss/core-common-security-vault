@@ -12,8 +12,6 @@
     <artifactId>common-platform-security-vault-web</artifactId>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -28,11 +26,15 @@
         <artifactId>common-platform-security-vault-interfaces</artifactId>
     </dependency>
 
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>kms</artifactId>
+        </dependency>
+
     <!-- Common Libraries -->
     <dependency>
-        <groupId>com.firefly</groupId>
-        <artifactId>lib-common-web</artifactId>
-        <version>${project.version}</version>
+        <groupId>org.fireflyframework</groupId>
+        <artifactId>fireflyframework-web</artifactId>
     </dependency>
 
     <!-- Spring Boot -->
@@ -84,6 +86,18 @@
         <scope>test</scope>
     </dependency>
 </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>software.amazon.awssdk</groupId>
+                <artifactId>bom</artifactId>
+                <version>2.25.30</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 <build>
 <finalName>${project.parent.artifactId}</finalName>

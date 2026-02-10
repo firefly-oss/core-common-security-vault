@@ -44,30 +44,35 @@ The "hexagon" represents the core application logic, which is:
 ```java
 public interface KeyManagementPort {
     // Encrypt plaintext using the specified key
-    Mono<byte[]> encrypt(byte[] plaintext, String keyId, Map<String, String> encryptionContext);
-    
+    Mono<EncryptionResult> encrypt(byte[] plaintext, String keyId, String context);
+
     // Decrypt ciphertext using the specified key
-    Mono<byte[]> decrypt(byte[] ciphertext, String keyId, Map<String, String> encryptionContext);
-    
+    Mono<byte[]> decrypt(byte[] ciphertext, String keyId, String context);
+
     // Generate a data encryption key (DEK)
-    Mono<DataKey> generateDataKey(String keyId, Map<String, String> encryptionContext);
-    
+    Mono<DataKey> generateDataKey(String keyId, String keySpec);
+
     // Rotate a key to a new version
     Mono<KeyRotationResult> rotateKey(String keyId);
-    
+
     // Validate that a key exists and is accessible
     Mono<Boolean> validateKey(String keyId);
-    
-    // Get the provider type (AWS_KMS, AZURE_KEY_VAULT, etc.)
-    String getProviderType();
+
+    // Get the provider type (IN_MEMORY, AWS_KMS, AZURE_KEY_VAULT, etc.)
+    ProviderType getProviderType();
 }
 ```
 
-**Records**:
+**Records and Enums**:
 
 ```java
-record DataKey(byte[] plaintext, byte[] encrypted) {}
-record KeyRotationResult(String newKeyVersion, Instant rotatedAt) {}
+record EncryptionResult(byte[] ciphertext, String keyId, String algorithm, String metadata) {}
+record DataKey(byte[] plaintextKey, byte[] encryptedKey, String keyId) {}
+record KeyRotationResult(boolean success, String newVersion, String message) {}
+
+enum ProviderType {
+    IN_MEMORY, AWS_KMS, AZURE_KEY_VAULT, HASHICORP_VAULT, GOOGLE_CLOUD_KMS
+}
 ```
 
 #### 2. CredentialEncryptionPort (Outbound Port)
@@ -81,20 +86,31 @@ record KeyRotationResult(String newKeyVersion, Instant rotatedAt) {}
 ```java
 public interface CredentialEncryptionPort {
     // Encrypt a credential value
-    Mono<String> encryptCredential(String plaintext, String keyId);
-    
+    Mono<CredentialEncryptionResult> encryptCredential(String plaintext, String keyId);
+
     // Decrypt a credential value
-    Mono<String> decryptCredential(String encryptedValue, String keyId);
-    
+    Mono<String> decryptCredential(String encryptedValue, String keyId, String iv);
+
     // Rotate credential encryption from old key to new key
-    Mono<String> rotateCredentialEncryption(String encryptedValue, String oldKeyId, String newKeyId);
-    
+    Mono<CredentialEncryptionResult> rotateCredentialEncryption(
+        String encryptedValue, String currentKeyId, String currentIv, String newKeyId);
+
     // Generate a new encryption key
-    Mono<String> generateEncryptionKey(String keyId);
-    
+    Mono<KeyGenerationResult> generateEncryptionKey(String keyId);
+
     // Validate an encryption key
     Mono<Boolean> validateEncryptionKey(String keyId);
+
+    // Get the current encryption provider type
+    String getProviderType();
 }
+```
+
+**Records**:
+
+```java
+record CredentialEncryptionResult(String encryptedValue, String iv, String algorithm, String keyId) {}
+record KeyGenerationResult(String keyId, String algorithm, String provider, boolean success) {}
 ```
 
 ### Adapters (Implementations)
@@ -258,17 +274,17 @@ firefly:
 - Metrics and event logging
 
 **Implementation**:
+
+`ResilientKeyManagementAdapter` is a plain decorator class (not a Spring bean). It is instantiated by `ResilienceConfiguration`, which defines the Circuit Breaker, Rate Limiter, and Retry beans with hardcoded values:
+
 ```java
-@Bean
-@ConditionalOnProperty(name = "firefly.security.vault.resilience.enabled", havingValue = "true")
-public KeyManagementPort resilientKeyManagementPort(
-    KeyManagementPort delegate,
-    CircuitBreaker circuitBreaker,
-    RateLimiter rateLimiter,
-    Retry retry
-) {
-    return new ResilientKeyManagementAdapter(delegate, circuitBreaker, rateLimiter, retry);
-}
+// ResilientKeyManagementAdapter is a plain class, not annotated with @Component
+KeyManagementPort resilientAdapter = new ResilientKeyManagementAdapter(
+    originalAdapter,
+    circuitBreaker,
+    rateLimiter,
+    retry
+);
 ```
 
 ## Benefits of Hexagonal Architecture
@@ -326,10 +342,10 @@ firefly.security.vault.encryption.provider: AZURE_KEY_VAULT
 @ConditionalOnProperty(name = "firefly.security.vault.encryption.provider", havingValue = "CUSTOM_KMS")
 public class CustomKmsKeyManagementAdapter implements KeyManagementPort {
     @Override
-    public Mono<byte[]> encrypt(byte[] plaintext, String keyId, Map<String, String> context) {
+    public Mono<EncryptionResult> encrypt(byte[] plaintext, String keyId, String context) {
         // Custom implementation
     }
-    
+
     // ... other methods
 }
 ```
@@ -377,15 +393,15 @@ public class CustomKmsKeyManagementAdapter implements KeyManagementPort {
 
 Ports should define clear, focused contracts:
 
-✅ **Good**: `Mono<byte[]> encrypt(byte[] plaintext, String keyId)`  
-❌ **Bad**: `Mono<EncryptionResult> encryptWithLoggingAndMetrics(EncryptionRequest request)`
+**Good**: `Mono<byte[]> encrypt(byte[] plaintext, String keyId)`  
+**Bad**: `Mono<EncryptionResult> encryptWithLoggingAndMetrics(EncryptionRequest request)`
 
 ### 2. One Adapter Per Provider
 
 Each KMS provider should have its own adapter:
 
-✅ **Good**: `AwsKmsKeyManagementAdapter`, `AzureKeyVaultKeyManagementAdapter`  
-❌ **Bad**: `UniversalKmsAdapter` with if/else for each provider
+**Good**: `AwsKmsKeyManagementAdapter`, `AzureKeyVaultKeyManagementAdapter`  
+**Bad**: `UniversalKmsAdapter` with if/else for each provider
 
 ### 3. Use Conditional Bean Loading
 
@@ -405,7 +421,7 @@ public class AwsKmsKeyManagementAdapter implements KeyManagementPort {
 All port methods return `Mono<T>` or `Flux<T>` for non-blocking operations:
 
 ```java
-Mono<byte[]> encrypt(byte[] plaintext, String keyId, Map<String, String> context);
+Mono<EncryptionResult> encrypt(byte[] plaintext, String keyId, String context);
 ```
 
 ## Next Steps

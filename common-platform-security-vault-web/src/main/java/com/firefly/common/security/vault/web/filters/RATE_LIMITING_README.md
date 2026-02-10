@@ -2,13 +2,13 @@
 
 ## Current Implementation
 
-✅ **In-Memory Rate Limiting** - Implemented using token bucket algorithm
+**In-Memory Rate Limiting** - Implemented using token bucket algorithm
 - Tracks requests per IP address
 - Configurable limit per minute
 - Automatic token refill
 - Standard HTTP 429 responses with retry headers
 
-⚠️ **Limitation**: In-memory implementation only works for single-instance deployments
+️ **Limitation**: In-memory implementation only works for single-instance deployments
 
 ## Configuration
 

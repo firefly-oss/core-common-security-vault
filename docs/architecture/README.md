@@ -169,8 +169,8 @@ common-platform-security-vault/
 
 ### Core Framework
 
-- **Java 21** - Modern Java with virtual threads and pattern matching
-- **Spring Boot 3.2.2** - Application framework
+- **Java 25** - Modern Java with virtual threads and pattern matching
+- **Spring Boot 3.5.10** - Application framework
 - **Spring WebFlux** - Reactive web framework
 - **Project Reactor** - Reactive programming library
 

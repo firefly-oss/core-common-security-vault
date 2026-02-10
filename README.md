@@ -28,8 +28,8 @@ limitations under the License.
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/firefly-oss/common-platform-security-vault)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Java](https://img.shields.io/badge/java-21-orange.svg)](https://openjdk.org/projects/jdk/21/)
-[![Spring Boot](https://img.shields.io/badge/spring%20boot-3.2.2-green.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/java-25-orange.svg)](https://openjdk.org/projects/jdk/25/)
+[![Spring Boot](https://img.shields.io/badge/spring%20boot-3.5.10-green.svg)](https://spring.io/projects/spring-boot)
 [![Architecture](https://img.shields.io/badge/architecture-hexagonal-blueviolet.svg)](docs/architecture/hexagonal-architecture.md)
 [![Tests](https://img.shields.io/badge/tests-94%20passing-success.svg)](common-platform-security-vault-core/src/test)
 [![Coverage](https://img.shields.io/badge/coverage-85%25-green.svg)](common-platform-security-vault-core/src/test)
@@ -38,13 +38,13 @@ limitations under the License.
 [![Documentation](https://img.shields.io/badge/docs-comprehensive-brightgreen)](./docs)
 [![API Docs](https://img.shields.io/badge/API-OpenAPI%203.0-85EA2D)](http://localhost:8081/swagger-ui.html)
 
-[🚀 Quick Start](#-quick-start-5-minutes) • [📖 Documentation](#-documentation) • [🔌 API Reference](#-api-reference) • [💬 Community](#-support--community)
+[Quick Start](#-quick-start-5-minutes) • [Documentation](#-documentation) • [API Reference](#-api-reference) • [Community](#-support--community)
 
 </div>
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
 ### Getting Started
 - [What is Firefly Security Vault?](#-what-is-firefly-security-vault)
@@ -87,40 +87,40 @@ limitations under the License.
 
 ---
 
-## 🔐 What is Firefly Security Vault?
+## What is Firefly Security Vault?
 
 **Firefly Security Vault** is an enterprise-grade, production-ready microservice designed to centralize and secure the management of sensitive credentials across your entire infrastructure. Built with **Hexagonal Architecture** and **reactive programming**, it provides a robust, scalable solution for storing, rotating, and auditing access to secrets.
 
-### 🎯 The Problem We Solve
+### The Problem We Solve
 
 Modern distributed systems face critical challenges in credential management:
 
 ```
-❌ Hardcoded secrets in source code
-❌ Credentials scattered across multiple systems
-❌ No audit trail of who accessed what
-❌ Manual rotation processes prone to errors
-❌ Lack of encryption at rest
-❌ No centralized access control
-❌ Compliance and regulatory risks
+Hardcoded secrets in source code
+Credentials scattered across multiple systems
+No audit trail of who accessed what
+Manual rotation processes prone to errors
+Lack of encryption at rest
+No centralized access control
+Compliance and regulatory risks
 ```
 
-### ✅ Our Solution
+### Our Solution
 
 Firefly Security Vault provides a **single source of truth** for all your sensitive credentials:
 
 ```
-✅ Centralized credential storage with AES-256-GCM encryption
-✅ Pluggable KMS providers (AWS, Azure, Google Cloud, HashiCorp)
-✅ Automatic rotation with configurable policies
-✅ Complete audit trail for compliance (SOC 2, PCI-DSS, GDPR)
-✅ Fine-grained access control (IP, service, environment)
-✅ Production-ready resilience (Circuit Breaker, Retry, Rate Limiter)
-✅ Multi-tenant support with complete isolation
-✅ Reactive, non-blocking architecture for high performance
+Centralized credential storage with AES-256-GCM encryption
+Pluggable KMS providers (AWS, Azure, Google Cloud, HashiCorp)
+Automatic rotation with configurable policies
+Complete audit trail for compliance (SOC 2, PCI-DSS, GDPR)
+Fine-grained access control (IP, service, environment)
+Production-ready resilience (Circuit Breaker, Retry, Rate Limiter)
+Multi-tenant support with complete isolation
+Reactive, non-blocking architecture for high performance
 ```
 
-### 🏢 Who Should Use This?
+### Who Should Use This?
 
 | Use Case | Example |
 |----------|---------|
@@ -131,7 +131,7 @@ Firefly Security Vault provides a **single source of truth** for all your sensit
 | **Enterprise IT** | Centralized secret management for microservices architecture |
 | **DevOps Teams** | Secure CI/CD pipeline credentials, infrastructure secrets |
 
-### 🏗️ Architecture at a Glance
+### Architecture at a Glance
 
 This microservice is built using **Hexagonal Architecture** (Ports and Adapters):
 
@@ -177,9 +177,9 @@ This microservice is built using **Hexagonal Architecture** (Ports and Adapters)
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-### 🔒 Enterprise-Grade Security
+### Enterprise-Grade Security
 
 <table>
 <tr>
@@ -227,18 +227,18 @@ This microservice is built using **Hexagonal Architecture** (Ports and Adapters)
 </tr>
 </table>
 
-### 🔄 Lifecycle Management
+### Lifecycle Management
 
 | Feature | Description | Status |
 |---------|-------------|--------|
-| **Automatic Rotation** | Policy-driven rotation schedules (e.g., every 90 days) | ✅ Production |
-| **Manual Rotation** | On-demand rotation with reason tracking | ✅ Production |
-| **Version History** | Complete history of all credential versions | ✅ Production |
-| **Rollback Support** | Restore previous credential versions | ✅ Production |
-| **Expiration Alerts** | Configurable warnings before expiration | ✅ Production |
-| **Multi-Version Support** | Keep configurable number of versions | ✅ Production |
+| **Automatic Rotation** | Policy-driven rotation schedules (e.g., every 90 days) | Production |
+| **Manual Rotation** | On-demand rotation with reason tracking | Production |
+| **Version History** | Complete history of all credential versions | Production |
+| **Rollback Support** | Restore previous credential versions | Production |
+| **Expiration Alerts** | Configurable warnings before expiration | Production |
+| **Multi-Version Support** | Keep configurable number of versions | Production |
 
-### 🏗️ Architecture Excellence
+### Architecture Excellence
 
 | Aspect | Implementation | Benefit |
 |--------|----------------|---------|
@@ -246,20 +246,20 @@ This microservice is built using **Hexagonal Architecture** (Ports and Adapters)
 | **Reactive Programming** | Spring WebFlux + R2DBC | Non-blocking, high-throughput operations |
 | **Resilience Patterns** | Resilience4j (Circuit Breaker, Retry, Rate Limiter) | Fault-tolerant, production-ready |
 | **Multi-Module Design** | Interfaces, Core, Web, SDK | Clean separation of concerns |
-| **Dependency Injection** | Spring Boot 3.2.2 | Testable, maintainable codebase |
+| **Dependency Injection** | Spring Boot 3.5.10 | Testable, maintainable codebase |
 
-### 📊 Observability & Monitoring
+### Observability & Monitoring
 
 ```yaml
-✅ Prometheus Metrics       # Request rates, latencies, error rates
-✅ Health Checks            # Database, KMS provider connectivity
-✅ Structured Logging       # JSON logs with correlation IDs
-✅ Distributed Tracing      # OpenTelemetry ready
-✅ Custom Dashboards        # Grafana dashboard templates included
-✅ Alerting Rules           # Pre-configured Prometheus alerts
+Prometheus Metrics       # Request rates, latencies, error rates
+Health Checks            # Database, KMS provider connectivity
+Structured Logging       # JSON logs with correlation IDs
+Distributed Tracing      # OpenTelemetry ready
+Custom Dashboards        # Grafana dashboard templates included
+Alerting Rules           # Pre-configured Prometheus alerts
 ```
 
-### 🚀 Developer Experience
+### Developer Experience
 
 - **Auto-Generated SDK**: OpenAPI 3.0 spec → Java SDK (WebClient-based)
 - **Interactive API Docs**: Swagger UI at `/swagger-ui.html`
@@ -268,7 +268,7 @@ This microservice is built using **Hexagonal Architecture** (Ports and Adapters)
 - **Kubernetes Ready**: Deployment manifests and Helm charts
 - **CI/CD Examples**: GitHub Actions, GitLab CI templates
 
-### 🌐 Multi-Tenant & Multi-Environment
+### Multi-Tenant & Multi-Environment
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -286,41 +286,41 @@ This microservice is built using **Hexagonal Architecture** (Ports and Adapters)
 
 ---
 
-## 🎯 Why Choose Firefly Security Vault?
+## Why Choose Firefly Security Vault?
 
 ### vs. HashiCorp Vault
 
 | Feature | Firefly Security Vault | HashiCorp Vault |
 |---------|------------------------|-----------------|
-| **Setup Complexity** | ✅ Simple (Spring Boot app) | ⚠️ Complex (cluster setup) |
-| **KMS Integration** | ✅ Native (AWS, Azure, GCP, HashiCorp) | ⚠️ Requires plugins |
-| **Banking-Specific** | ✅ Built for financial services | ❌ General purpose |
-| **Java SDK** | ✅ Auto-generated from OpenAPI | ⚠️ Community-maintained |
-| **Reactive Support** | ✅ Native (Spring WebFlux) | ❌ Blocking I/O |
-| **Cost** | ✅ Open Source (Apache 2.0) | ⚠️ Enterprise features paid |
+| **Setup Complexity** | Simple (Spring Boot app) | Complex (cluster setup) |
+| **KMS Integration** | Native (AWS, Azure, GCP, HashiCorp) | Requires plugins |
+| **Banking-Specific** | Built for financial services | General purpose |
+| **Java SDK** | Auto-generated from OpenAPI | Community-maintained |
+| **Reactive Support** | Native (Spring WebFlux) | Blocking I/O |
+| **Cost** | Open Source (Apache 2.0) | Enterprise features paid |
 
 ### vs. AWS Secrets Manager
 
 | Feature | Firefly Security Vault | AWS Secrets Manager |
 |---------|------------------------|---------------------|
-| **Multi-Cloud** | ✅ AWS, Azure, GCP, HashiCorp | ❌ AWS only |
-| **Self-Hosted** | ✅ Full control | ❌ AWS managed only |
-| **Customization** | ✅ Fully customizable | ❌ Limited |
-| **Audit Trail** | ✅ Custom audit logic | ✅ CloudTrail |
-| **Cost** | ✅ Infrastructure only | ⚠️ Per secret + API calls |
-| **Vendor Lock-in** | ✅ None | ❌ AWS locked |
+| **Multi-Cloud** | AWS, Azure, GCP, HashiCorp | AWS only |
+| **Self-Hosted** | Full control | AWS managed only |
+| **Customization** | Fully customizable | Limited |
+| **Audit Trail** | Custom audit logic | CloudTrail |
+| **Cost** | Infrastructure only | Per secret + API calls |
+| **Vendor Lock-in** | None | AWS locked |
 
 ### vs. Azure Key Vault
 
 | Feature | Firefly Security Vault | Azure Key Vault |
 |---------|------------------------|-----------------|
-| **Multi-Cloud** | ✅ AWS, Azure, GCP, HashiCorp | ❌ Azure only |
-| **Banking Features** | ✅ Rotation, versioning, approval | ⚠️ Basic features |
-| **Custom Logic** | ✅ Full control | ❌ Limited |
-| **Open Source** | ✅ Apache 2.0 | ❌ Proprietary |
-| **Cost** | ✅ Infrastructure only | ⚠️ Per operation |
+| **Multi-Cloud** | AWS, Azure, GCP, HashiCorp | Azure only |
+| **Banking Features** | Rotation, versioning, approval | Basic features |
+| **Custom Logic** | Full control | Limited |
+| **Open Source** | Apache 2.0 | Proprietary |
+| **Cost** | Infrastructure only | Per operation |
 
-## 🚀 Quick Start (5 Minutes)
+## Quick Start (5 Minutes)
 
 Get the microservice running locally in 5 minutes for development and testing.
 
@@ -328,7 +328,7 @@ Get the microservice running locally in 5 minutes for development and testing.
 
 | Requirement | Version | Download |
 |------------|---------|----------|
-| **Java** | 21+ | [OpenJDK 21](https://openjdk.org/projects/jdk/21/) |
+| **Java** | 25+ | [OpenJDK 25](https://openjdk.org/projects/jdk/25/) |
 | **PostgreSQL** | 14+ | [PostgreSQL](https://www.postgresql.org/download/) |
 | **Maven** | 3.8+ | [Maven](https://maven.apache.org/download.cgi) |
 
@@ -393,7 +393,7 @@ mvn spring-boot:run -Dspring-boot.run.profiles=local
 Once the service starts, you should see:
 
 ```
-Started SecurityVaultApplication in X.XXX seconds
+Started CommonPlatformCommonPlatformSecurityVaultApplication in X.XXX seconds
 ```
 
 Test the endpoints:
@@ -424,11 +424,11 @@ curl -X POST http://localhost:8081/api/v1/credentials \
 
 Or use Swagger UI at http://localhost:8081/swagger-ui.html
 
-**🎉 Congratulations!** Your Security Vault microservice is running locally.
+**Congratulations!** Your Security Vault microservice is running locally.
 
 ---
 
-## 📚 Step-by-Step Tutorials
+## Step-by-Step Tutorials
 
 ### Tutorial 1: Storing and Retrieving API Keys
 
@@ -553,15 +553,15 @@ curl -X POST http://localhost:8081/api/v1/credentials \
 ```
 
 **Access Control Features**:
-- ✅ Only `payment-service` and `billing-service` can access
-- ✅ Only from IPs in `10.0.1.0/24` or `10.0.2.100`
-- ✅ Only in `PRODUCTION` environment
-- ✅ Requires approval before access
-- ✅ All access attempts are logged
+- Only `payment-service` and `billing-service` can access
+- Only from IPs in `10.0.1.0/24` or `10.0.2.100`
+- Only in `PRODUCTION` environment
+- Requires approval before access
+- All access attempts are logged
 
 ---
 
-## 🏭 Production Deployment Guide
+## Production Deployment Guide
 
 This section provides complete guidance for deploying the Security Vault microservice to production.
 
@@ -639,35 +639,14 @@ firefly:
         master-key-id: ${AWS_KMS_KEY_ARN}
         aws-kms:
           region: ${AWS_REGION}
-          # Optional: Use specific credentials
-          # access-key-id: ${AWS_ACCESS_KEY_ID}
-          # secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+          # Optional: Use specific credentials (prefer IAM roles instead)
+          # access-key: ${AWS_ACCESS_KEY_ID}
+          # secret-key: ${AWS_SECRET_ACCESS_KEY}
+          # access-token: ${AWS_SESSION_TOKEN}
       audit:
         enabled: true
-        log-decryption: true
-        log-failed-access: true
-
-# Resilience Configuration
-resilience4j:
-  circuitbreaker:
-    instances:
-      kms-operations:
-        failure-rate-threshold: 50
-        wait-duration-in-open-state: 60s
-        sliding-window-size: 10
-        minimum-number-of-calls: 5
-  ratelimiter:
-    instances:
-      kms-operations:
-        limit-for-period: 100
-        limit-refresh-period: 1s
-        timeout-duration: 5s
-  retry:
-    instances:
-      kms-operations:
-        max-attempts: 3
-        wait-duration: 1s
-        exponential-backoff-multiplier: 2.0
+        log-decryptions: true
+        log-all-attempts: true
 
 # Monitoring
 management:
@@ -903,13 +882,14 @@ gcloud kms keys add-iam-policy-binding firefly-encryption-key \
 firefly:
   security:
     vault:
-      encryption:
+      kms:
         provider: GOOGLE_CLOUD_KMS
+      encryption:
         google-cloud-kms:
           project-id: ${GCP_PROJECT_ID}
-          location: us-east1
-          key-ring: firefly-keyring
-          key-name: firefly-encryption-key
+          location-id: us-east1
+          key-ring-id: firefly-keyring
+          key-id: firefly-encryption-key
           # Optional: Use service account key file
           # credentials-path: /path/to/service-account-key.json
 ```
@@ -1019,7 +999,7 @@ groups:
 
 ---
 
-## 🏗️ Architecture Deep Dive
+## Architecture Deep Dive
 
 ### Hexagonal Architecture (Ports and Adapters)
 
@@ -1083,9 +1063,7 @@ common-platform-security-vault/
 │   └── migrations/         # Flyway SQL scripts
 │
 ├── common-platform-security-vault-interfaces/
-│   ├── dto/               # Data Transfer Objects
-│   ├── requests/          # API request models
-│   └── responses/         # API response models
+│   └── dtos/              # Data Transfer Objects (CredentialDTO, CredentialVersionDTO, etc.)
 │
 ├── common-platform-security-vault-core/
 │   ├── ports/             # Domain interfaces
@@ -1117,12 +1095,12 @@ common-platform-security-vault/
 │   │   └── KeyManagementHealthIndicator.java
 │   │
 │   └── metrics/           # Metrics collectors
-│       └── KeyManagementMetrics.java
+│       └── SecurityVaultMetrics.java
 │
 ├── common-platform-security-vault-web/
 │   ├── controllers/       # REST API endpoints
 │   ├── exception/         # Exception handlers
-│   └── SecurityVaultApplication.java  # Main class
+│   └── CommonPlatformCommonPlatformSecurityVaultApplication.java  # Main class
 │
 └── common-platform-security-vault-sdk/
     ├── src/main/resources/api-spec/
@@ -1155,10 +1133,10 @@ The microservice implements three resilience patterns using **Resilience4j**:
 **How it works**:
 ```
 Normal State (CLOSED):
-  Request → KMS → Success ✓
+  Request → KMS → Success 
 
 Failure State (OPEN):
-  Request → Circuit Breaker → Fail Fast ✗
+  Request → Circuit Breaker → Fail Fast 
   (No call to KMS - prevents overload)
 
 Recovery State (HALF_OPEN):
@@ -1179,8 +1157,8 @@ Recovery State (HALF_OPEN):
 **How it works**:
 ```
 100 requests/second allowed
-Request 1-100: ✓ Allowed
-Request 101: ✗ Rejected (wait or fail)
+Request 1-100: Allowed
+Request 101: Rejected (wait or fail)
 After 1 second: Reset to 0
 ```
 
@@ -1198,7 +1176,7 @@ Attempt 1: Network timeout → Retry
 Wait 1 second...
 Attempt 2: Network timeout → Retry
 Wait 2 seconds... (exponential backoff)
-Attempt 3: Success ✓
+Attempt 3: Success 
 ```
 
 **Configuration**:
@@ -1218,13 +1196,13 @@ See [Resilience Patterns Documentation](docs/resilience-patterns.md) for details
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 | Category | Technology | Version | Purpose |
 |----------|-----------|---------|---------|
-| **Language** | Java | 21 | Modern Java with virtual threads, pattern matching, records |
-| **Framework** | Spring Boot | 3.2.2 | Application framework with auto-configuration |
-| **Web** | Spring WebFlux | 3.2.2 | Reactive, non-blocking web framework |
+| **Language** | Java | 25 | Modern Java with virtual threads, pattern matching, records |
+| **Framework** | Spring Boot | 3.5.10 | Application framework with auto-configuration |
+| **Web** | Spring WebFlux | 3.5.10 | Reactive, non-blocking web framework |
 | **Database** | PostgreSQL | 14+ | ACID-compliant relational database |
 | **DB Access** | R2DBC | Latest | Reactive database connectivity |
 | **Migrations** | Flyway | Latest | Database version control and migrations |
@@ -1234,14 +1212,14 @@ See [Resilience Patterns Documentation](docs/resilience-patterns.md) for details
 | **KMS SDKs** | AWS, Azure, HashiCorp, Google | Latest | Cloud provider KMS integrations |
 | **Resilience** | Resilience4j | Latest | Circuit Breaker, Rate Limiter, Retry |
 | **Metrics** | Micrometer | Latest | Vendor-neutral metrics facade |
-| **Monitoring** | Spring Boot Actuator | 3.2.2 | Health checks and operational endpoints |
+| **Monitoring** | Spring Boot Actuator | 3.5.10 | Health checks and operational endpoints |
 | **Logging** | SLF4J + Logback | Latest | Structured logging |
 | **Testing** | JUnit 5 + Mockito + Reactor Test | Latest | Unit and integration testing |
 | **API Docs** | SpringDoc OpenAPI | Latest | Automatic Swagger/OpenAPI generation |
 
 ---
 
-## 📊 Data Model
+## Data Model
 
 The microservice manages **10 core entities** with complete CRUD operations:
 
@@ -1249,15 +1227,15 @@ The microservice manages **10 core entities** with complete CRUD operations:
 
 ```
 ┌─────────────────┐         ┌──────────────────┐
-│  Credential     │────────▶│  CredentialType  │
+│  Credential     │────────│  CredentialType  │
 │                 │         └──────────────────┘
 │  - id           │
 │  - code         │         ┌──────────────────┐
-│  - name         │────────▶│ CredentialStatus │
+│  - name         │────────│ CredentialStatus │
 │  - encrypted    │         └──────────────────┘
 │  - tenantId     │
 │  - providerId   │         ┌──────────────────┐
-│  - rotation     │────────▶│ EnvironmentType  │
+│  - rotation     │────────│ EnvironmentType  │
 │  - expiration   │         └──────────────────┘
 └─────────────────┘
         │
@@ -1453,7 +1431,7 @@ All tables include standard audit fields:
 
 ---
 
-## 🔌 API Reference
+## API Reference
 
 The microservice exposes a comprehensive REST API with **10 controllers** and **~50 endpoints**.
 
@@ -1465,10 +1443,12 @@ http://localhost:8081/api/v1
 
 ### Authentication
 
-Currently, the API does not include built-in authentication. In production, you should:
-1. Deploy behind an API Gateway (AWS API Gateway, Kong, etc.)
-2. Use OAuth 2.0 / JWT tokens
-3. Implement Spring Security with your authentication provider
+Authentication and authorization are delegated to the **Istio service mesh**. The Spring Security configuration permits all exchanges and relies on Istio for:
+1. **mTLS** between services
+2. **JWT validation**
+3. **Authorization policies**
+
+Application-level access control is handled by `AccessControlService`, which enforces IP whitelisting, service whitelisting, and approval workflows for sensitive credentials.
 
 ### API Endpoints Overview
 
@@ -1608,15 +1588,15 @@ POST /api/v1/credentials/{id}/decrypt?reason=Processing%20payment
 - `reason` (optional) - Reason for accessing the credential (for audit trail)
 
 **Headers**:
-- `X-User-Id` - User ID (extracted from JWT or service context)
-- `X-Service-Name` - Service name (extracted from Istio headers or config)
-- `X-Forwarded-For` - IP address (extracted from request)
+- `X-User-Id` or `X-Forwarded-User` - User ID (extracted from Istio/JWT context)
+- `X-Source-Service` or `X-Forwarded-Service` - Service name (extracted from Istio headers)
+- `X-Forwarded-For` - IP address (extracted from proxy/Istio)
 
 **Example**:
 ```bash
 curl -X POST "http://localhost:8081/api/v1/credentials/123e4567-e89b-12d3-a456-426614174000/decrypt?reason=Processing%20payment" \
   -H "X-User-Id: payment-service-account" \
-  -H "X-Service-Name: payment-service" \
+  -H "X-Source-Service: payment-service" \
   -H "X-Forwarded-For: 10.0.1.50"
 ```
 
@@ -1628,12 +1608,12 @@ sk_live_51H...
 The response is the **plain text decrypted value** as a string.
 
 **Access Control**: This endpoint validates:
-- ✅ Service is in `allowedServices` list
-- ✅ IP is in `allowedIps` list
-- ✅ Environment matches
-- ✅ Approval is provided if required (`requireApprovalForAccess`)
-- ✅ Credential is ACTIVE and not expired
-- ✅ All access is logged in the audit trail
+- Service is in `allowedServices` list
+- IP is in `allowedIps` list
+- Environment matches
+- Approval is provided if required (`requireApprovalForAccess`)
+- Credential is ACTIVE and not expired
+- All access is logged in the audit trail
 
 #### Get Credential Versions
 
@@ -1698,9 +1678,9 @@ All errors follow a consistent format:
 
 ### Rate Limiting
 
-The API is protected by a rate limiter:
-- **Limit**: 100 requests/second per instance
-- **Response**: `429 Too Many Requests` when exceeded
+The API is protected by a rate limiter (per client IP):
+- **Limit**: 100 requests/minute per client (configurable via `firefly.security.vault.access-control.rate-limit-per-minute`)
+- **Response**: `429 Too Many Requests` when exceeded, with `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`, and `Retry-After` headers
 
 ### Interactive API Documentation
 
@@ -1709,14 +1689,14 @@ When the service is running, access:
 **Swagger UI**: http://localhost:8081/swagger-ui.html
 
 This provides:
-- ✅ Interactive API testing
-- ✅ Request/response examples
-- ✅ Schema documentation
-- ✅ Try-it-out functionality
+- Interactive API testing
+- Request/response examples
+- Schema documentation
+- Try-it-out functionality
 
 ---
 
-## 📦 Java SDK Usage
+## Java SDK Usage
 
 The microservice includes an **auto-generated Java SDK** using OpenAPI Generator. The SDK provides type-safe, reactive API clients.
 
@@ -1915,7 +1895,7 @@ apiClient.addDefaultHeader("Authorization", "Bearer " + jwtToken);
 // Configure timeouts (via WebClient)
 WebClient customWebClient = WebClient.builder()
     .baseUrl("http://localhost:8081")
-    .defaultHeader("X-Service-Name", "payment-service")
+    .defaultHeader("X-Source-Service", "payment-service")
     .build();
 
 ApiClient customApiClient = new ApiClient(customWebClient);
@@ -1923,17 +1903,17 @@ ApiClient customApiClient = new ApiClient(customWebClient);
 
 ---
 
-## 🔒 Security & Compliance
+## Security & Compliance
 
 ### Encryption Details
 
 The microservice uses **AES-256-GCM** (Galois/Counter Mode) for encryption:
 
 **Why AES-256-GCM?**
-- ✅ **NIST Approved**: Recommended by NIST for sensitive data
-- ✅ **Authenticated Encryption**: Provides both confidentiality and integrity
-- ✅ **Performance**: Hardware-accelerated on modern CPUs
-- ✅ **Tamper Detection**: 128-bit authentication tag prevents tampering
+- **NIST Approved**: Recommended by NIST for sensitive data
+- **Authenticated Encryption**: Provides both confidentiality and integrity
+- **Performance**: Hardware-accelerated on modern CPUs
+- **Tamper Detection**: 128-bit authentication tag prevents tampering
 
 **Encryption Process**:
 
@@ -2005,10 +1985,10 @@ The microservice uses **envelope encryption** for enhanced security:
 ```
 
 **Benefits**:
-- ✅ Master key never leaves KMS
-- ✅ Can encrypt large amounts of data efficiently
-- ✅ Easy key rotation (re-encrypt DEK with new MEK)
-- ✅ Compliance with security standards
+- Master key never leaves KMS
+- Can encrypt large amounts of data efficiently
+- Easy key rotation (re-encrypt DEK with new MEK)
+- Compliance with security standards
 
 ### Access Control Matrix
 
@@ -2035,10 +2015,10 @@ The microservice uses **envelope encryption** for enhanced security:
 
 // Access request
 {
-  "serviceName": "payment-service",  // ✓ In allowedServices
-  "ipAddress": "10.0.1.50",          // ✓ In allowedIps (10.0.1.0/24)
-  "environment": "PRODUCTION",        // ✓ Matches allowedEnvironments
-  "hasApproval": true                 // ✓ Approval provided
+  "serviceName": "payment-service",  // In allowedServices
+  "ipAddress": "10.0.1.50",          // In allowedIps (10.0.1.0/24)
+  "environment": "PRODUCTION",        // Matches allowedEnvironments
+  "hasApproval": true                 // Approval provided
 }
 // Result: Access GRANTED
 ```
@@ -2059,35 +2039,25 @@ Every credential access is logged with:
 | `durationMs` | How long it took | `45` ms |
 | `failureReason` | Why it failed (if failed) | `IP not whitelisted` |
 
-**Audit Query Examples**:
+**Audit Data Access**:
 
-```bash
-# Who accessed credential X in the last 24 hours?
-POST /api/v1/credential-access-logs/filter
-{
-  "filters": {
-    "credentialId": "123e4567-...",
-    "accessedAt": { "gte": "2025-10-30T10:30:00Z" }
-  }
-}
+Audit logs are stored in the `credential_access_logs` database table. Currently there is no dedicated REST endpoint for querying audit logs -- audit data should be accessed directly via database queries or monitoring dashboards.
 
-# Failed access attempts from specific IP
-POST /api/v1/credential-access-logs/filter
-{
-  "filters": {
-    "ipAddress": "192.168.1.100",
-    "success": false
-  }
-}
+```sql
+-- Who accessed credential X in the last 24 hours?
+SELECT * FROM credential_access_logs
+WHERE credential_id = '123e4567-...'
+  AND accessed_at >= NOW() - INTERVAL '24 hours';
 
-# All decryptions by service
-POST /api/v1/credential-access-logs/filter
-{
-  "filters": {
-    "serviceName": "payment-service",
-    "decrypted": true
-  }
-}
+-- Failed access attempts from specific IP
+SELECT * FROM credential_access_logs
+WHERE access_ip = '192.168.1.100'
+  AND access_result != 'SUCCESS';
+
+-- All decryptions by service
+SELECT * FROM credential_access_logs
+WHERE accessed_by_service = 'payment-service'
+  AND decryption_successful = true;
 ```
 
 ### Compliance Features
@@ -2107,33 +2077,33 @@ POST /api/v1/credential-access-logs/filter
 #### 1. Never Log Plaintext Credentials
 
 ```java
-// ❌ BAD
+// BAD
 log.info("Decrypted value: {}", decryptedValue);
 
-// ✅ GOOD
+// GOOD
 log.info("Credential {} decrypted successfully", credentialId);
 ```
 
 #### 2. Use Environment Variables for Sensitive Config
 
 ```yaml
-# ❌ BAD
+# BAD
 firefly:
   security:
     vault:
       encryption:
         aws-kms:
-          access-key-id: AKIAIOSFODNN7EXAMPLE
-          secret-access-key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+          access-key: AKIAIOSFODNN7EXAMPLE
+          secret-key: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
-# ✅ GOOD
+# GOOD
 firefly:
   security:
     vault:
       encryption:
         aws-kms:
-          access-key-id: ${AWS_ACCESS_KEY_ID}
-          secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+          access-key: ${AWS_ACCESS_KEY_ID}
+          secret-key: ${AWS_SECRET_ACCESS_KEY}
 ```
 
 #### 3. Enable TLS in Production
@@ -2166,7 +2136,7 @@ Already built-in with Resilience4j:
 
 ---
 
-## 💡 Real-World Use Cases
+## Real-World Use Cases
 
 ### Use Case 1: Payment Provider Integration
 
@@ -2214,19 +2184,19 @@ curl -X POST http://localhost:8081/api/v1/credentials \
 # 4. Retrieve in your payment service
 curl -X POST "http://localhost:8081/api/v1/credentials/{id}/decrypt?reason=Processing%20customer%20payment" \
   -H "X-User-Id: payment-service-account" \
-  -H "X-Service-Name: payment-service" \
+  -H "X-Source-Service: payment-service" \
   -H "X-Forwarded-For: 10.0.1.50"
 
 # Response: sk_live_51H...
 ```
 
 **Benefits**:
-- ✅ API key encrypted with AES-256-GCM
-- ✅ Automatic rotation every 90 days
-- ✅ Only accessible from payment-service
-- ✅ Only accessible from 10.0.1.0/24 network
-- ✅ All access logged for audit
-- ✅ Masked in logs to prevent leakage
+- API key encrypted with AES-256-GCM
+- Automatic rotation every 90 days
+- Only accessible from payment-service
+- Only accessible from 10.0.1.0/24 network
+- All access logged for audit
+- Masked in logs to prevent leakage
 
 ### Use Case 2: Multi-Environment Database Credentials
 
@@ -2254,10 +2224,10 @@ done
 ```
 
 **Benefits**:
-- ✅ Complete environment isolation
-- ✅ Different rotation policies per environment
-- ✅ Separate access controls
-- ✅ Easy to manage and audit
+- Complete environment isolation
+- Different rotation policies per environment
+- Separate access controls
+- Easy to manage and audit
 
 ### Use Case 3: OAuth 2.0 Client Credentials with Approval
 
@@ -2283,22 +2253,22 @@ curl -X POST http://localhost:8081/api/v1/credentials \
 # 2. Request access (will fail without approval)
 curl -X POST "http://localhost:8081/api/v1/credentials/{id}/decrypt?reason=Testing%20payment%20integration" \
   -H "X-User-Id: developer@example.com" \
-  -H "X-Service-Name: payment-integration-service" \
+  -H "X-Source-Service: payment-integration-service" \
   -H "X-Forwarded-For: 10.0.1.100"
 # Response: 403 Forbidden - Approval required
 
 # 3. Request with approval (approval mechanism would be implemented separately)
 curl -X POST "http://localhost:8081/api/v1/credentials/{id}/decrypt?reason=Approved%20by%20manager%40example.com%20-%20Ticket%20%2312345" \
   -H "X-User-Id: developer@example.com" \
-  -H "X-Service-Name: payment-integration-service" \
+  -H "X-Source-Service: payment-integration-service" \
   -H "X-Forwarded-For: 10.0.1.100"
 # Response: 200 OK - Access granted (if approval was granted through separate workflow)
 ```
 
 **Benefits**:
-- ✅ Approval workflow for sensitive credentials
-- ✅ Audit trail includes approval reason
-- ✅ Prevents unauthorized access
+- Approval workflow for sensitive credentials
+- Audit trail includes approval reason
+- Prevents unauthorized access
 
 ### Use Case 4: Multi-Tenant Credential Management
 
@@ -2350,11 +2320,11 @@ curl -X POST http://localhost:8081/api/v1/credentials/filter \
 ```
 
 **Benefits**:
-- ✅ Complete tenant isolation
-- ✅ Separate access controls per tenant
-- ✅ Easy filtering by tenant
-- ✅ Audit trail per tenant
-- ✅ Scalable multi-tenant architecture
+- Complete tenant isolation
+- Separate access controls per tenant
+- Easy filtering by tenant
+- Audit trail per tenant
+- Scalable multi-tenant architecture
 
 ### Use Case 5: Credential Rotation and Version History
 
@@ -2408,15 +2378,15 @@ curl -X POST http://localhost:8081/api/v1/credentials/filter \
 ```
 
 **Benefits**:
-- ✅ Rotation tracking with autoRotationDays
-- ✅ Alert before rotation with rotateBeforeDays
-- ✅ Complete version history via credential-versions
-- ✅ Manual rotation via UPDATE endpoint
-- ✅ Filter credentials needing rotation
+- Rotation tracking with autoRotationDays
+- Alert before rotation with rotateBeforeDays
+- Complete version history via credential-versions
+- Manual rotation via UPDATE endpoint
+- Filter credentials needing rotation
 
 ---
 
-## 📊 Monitoring & Observability
+## Monitoring & Observability
 
 ### Health Checks
 
@@ -2476,13 +2446,15 @@ curl http://localhost:8081/actuator/prometheus
 | `resilience4j_circuitbreaker_failure_rate` | Gauge | Circuit breaker failure rate |
 | `resilience4j_ratelimiter_available_permissions` | Gauge | Available rate limiter permissions |
 | `resilience4j_retry_calls` | Counter | Retry attempts |
-| `kms_encryption_total` | Counter | Total encryption operations |
-| `kms_decryption_total` | Counter | Total decryption operations |
-| `kms_encryption_duration_seconds` | Histogram | Encryption operation latency |
-| `kms_decryption_duration_seconds` | Histogram | Decryption operation latency |
-| `credential_access_total` | Counter | Total credential access attempts |
-| `credential_access_denied_total` | Counter | Denied access attempts |
-| `credential_rotation_total` | Counter | Total credential rotations |
+| `vault.encryption.operations` | Counter | Encryption/decryption operations (tagged by operation, algorithm, success) |
+| `vault.encryption.duration` | Timer | Encryption/decryption operation latency (tagged by operation, algorithm) |
+| `vault.credential.operations` | Counter | Credential CRUD operations (tagged by operation, credential_type, success) |
+| `vault.access.control` | Counter | Access control decisions (tagged by decision, reason) |
+| `vault.audit.events` | Counter | Audit log events (tagged by event_type, result) |
+| `vault.rotation.operations` | Counter | Rotation operations (tagged by type, success) |
+| `vault.security.events` | Counter | Security events and violations (tagged by event_type, severity) |
+| `vault.credentials.active` | Gauge | Number of active credentials |
+| `vault.credentials.expired` | Gauge | Number of expired credentials |
 
 **Example Prometheus Queries**:
 
@@ -2500,7 +2472,7 @@ histogram_quantile(0.95, rate(http_server_requests_seconds_bucket[5m]))
 resilience4j_circuitbreaker_state{name="kms-operations"}
 
 # Failed access attempts
-rate(credential_access_denied_total[5m])
+rate(vault_access_control_total{decision="deny"}[5m])
 ```
 
 ### Logging
@@ -2517,10 +2489,10 @@ The microservice uses structured logging with SLF4J and Logback:
 **Example Log Output**:
 
 ```
-2025-10-31 10:30:00 INFO  [main] c.f.c.s.v.SecurityVaultApplication - Starting SecurityVaultApplication
+2025-10-31 10:30:00 INFO  [main] c.f.c.s.v.CommonPlatformSecurityVaultApplication - Starting CommonPlatformSecurityVaultApplication
 2025-10-31 10:30:01 INFO  [main] c.f.c.s.v.c.KmsProviderConfiguration - Initializing KMS provider: AWS_KMS
 2025-10-31 10:30:02 INFO  [main] c.f.c.s.v.c.ResilienceConfiguration - Configuring resilience patterns
-2025-10-31 10:30:03 INFO  [main] c.f.c.s.v.SecurityVaultApplication - Started SecurityVaultApplication in 3.456 seconds
+2025-10-31 10:30:03 INFO  [main] c.f.c.s.v.CommonPlatformSecurityVaultApplication - Started CommonPlatformSecurityVaultApplication in 3.456 seconds
 2025-10-31 10:30:15 INFO  [reactor-http-nio-2] c.f.c.s.v.s.CredentialServiceImpl - Credential created: STRIPE_API_KEY_PROD
 2025-10-31 10:30:20 INFO  [reactor-http-nio-3] c.f.c.s.v.s.CredentialServiceImpl - Credential decrypted: STRIPE_API_KEY_PROD (user=payment-service)
 2025-10-31 10:30:25 WARN  [reactor-http-nio-4] c.f.c.s.v.a.ResilientKeyManagementAdapter - Retry attempt 1 for KMS operation: Network timeout
@@ -2629,7 +2601,7 @@ groups:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 The microservice includes **94 unit tests** with **85% code coverage**.
 
@@ -2726,7 +2698,7 @@ class CredentialServiceImplTest {
 
 ---
 
-## 📚 Additional Documentation
+## Additional Documentation
 
 Comprehensive documentation is available in the [`docs/`](docs/) directory:
 
@@ -2741,7 +2713,7 @@ Comprehensive documentation is available in the [`docs/`](docs/) directory:
 | [Development Guide](docs/development/README.md) | Contributing, testing, best practices |
 | [Security Guide](docs/security/README.md) | Security features and best practices |
 
-## ❓ Frequently Asked Questions (FAQ)
+## Frequently Asked Questions (FAQ)
 
 ### General Questions
 
@@ -2777,12 +2749,12 @@ A: Choose based on your infrastructure:
 **Q: Is this production-ready?**
 
 A: Yes! The microservice includes:
-- ✅ 94 unit tests with 85% coverage
-- ✅ Production-grade resilience patterns (Circuit Breaker, Rate Limiter, Retry)
-- ✅ Complete audit logging
-- ✅ Health checks and metrics
-- ✅ Multi-KMS provider support
-- ✅ Comprehensive documentation
+- 94 unit tests with 85% coverage
+- Production-grade resilience patterns (Circuit Breaker, Rate Limiter, Retry)
+- Complete audit logging
+- Health checks and metrics
+- Multi-KMS provider support
+- Comprehensive documentation
 
 ### Security Questions
 
@@ -2904,7 +2876,7 @@ Caching would reduce security and auditability.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Here's how to get started:
 
@@ -2955,40 +2927,40 @@ mvn spring-boot:run -Dspring-boot.run.profiles=local
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
 
 ### What does this mean?
 
-✅ **You can**:
+**You can**:
 - Use this software for commercial purposes
 - Modify the source code
 - Distribute the software
 - Use this software privately
 - Use patent claims
 
-❌ **You cannot**:
+**You cannot**:
 - Hold the authors liable
 - Use trademarks without permission
 
-📋 **You must**:
+**You must**:
 - Include the license and copyright notice
 - State significant changes made to the code
 
 ---
 
-## 🆘 Support & Community
+## Support & Community
 
 ### Getting Help
 
 | Resource | Link | Description |
 |----------|------|-------------|
-| **📖 Documentation** | [docs/](./docs) | Comprehensive guides and tutorials |
-| **🐛 Issues** | [GitHub Issues](https://github.com/firefly-oss/common-platform-security-vault/issues) | Bug reports and feature requests |
-| **💬 Discussions** | [GitHub Discussions](https://github.com/firefly-oss/common-platform-security-vault/discussions) | Questions and community support |
-| **📧 Email** | dev@getfirefly.io | Direct support |
-| **🌐 Website** | [getfirefly.io](https://getfirefly.io) | Firefly platform information |
+| **Documentation** | [docs/](./docs) | Comprehensive guides and tutorials |
+| **Issues** | [GitHub Issues](https://github.com/firefly-oss/common-platform-security-vault/issues) | Bug reports and feature requests |
+| **Discussions** | [GitHub Discussions](https://github.com/firefly-oss/common-platform-security-vault/discussions) | Questions and community support |
+| **Email** | dev@getfirefly.io | Direct support |
+| **Website** | [getfirefly.io](https://getfirefly.io) | Firefly platform information |
 
 ### Reporting Security Vulnerabilities
 
@@ -3000,20 +2972,20 @@ We will respond within 48 hours and work with you to address the issue.
 
 ---
 
-## 🏦 About Firefly
+## About Firefly
 
 **Firefly** is an open-source core banking platform designed for modern financial institutions.
 
 ### Platform Features
 
-- 🏢 **Multi-tenant Architecture** - Complete tenant isolation with shared infrastructure
-- 🔧 **Microservices Design** - Scalable, maintainable, and independently deployable
-- 🔌 **Provider Integrations** - Extensive third-party integrations (payment gateways, KYC, etc.)
-- 🎨 **Customizable** - Flexible configuration and extensibility
-- 🔒 **Enterprise Security** - Bank-grade security features and compliance
-- ✅ **Compliance Ready** - PCI DSS, GDPR, SOC 2, ISO 27001 support
-- 📊 **Analytics & Reporting** - Built-in analytics and compliance reporting
-- 🌍 **Multi-currency** - Support for multiple currencies and exchange rates
+- **Multi-tenant Architecture** - Complete tenant isolation with shared infrastructure
+- **Microservices Design** - Scalable, maintainable, and independently deployable
+- **Provider Integrations** - Extensive third-party integrations (payment gateways, KYC, etc.)
+- **Customizable** - Flexible configuration and extensibility
+- **Enterprise Security** - Bank-grade security features and compliance
+- **Compliance Ready** - PCI DSS, GDPR, SOC 2, ISO 27001 support
+- **Analytics & Reporting** - Built-in analytics and compliance reporting
+- **Multi-currency** - Support for multiple currencies and exchange rates
 
 ### Other Firefly Microservices
 
@@ -3028,7 +3000,7 @@ Learn more at [getfirefly.io](https://getfirefly.io)
 
 ---
 
-## 🎯 Roadmap
+## Roadmap
 
 ### Planned Features
 
@@ -3055,5 +3027,5 @@ Learn more at [getfirefly.io](https://getfirefly.io)
 
 ---
 
-**Made with ❤️ by Firefly Software Solutions Inc**
-Copyright © 2025 Firefly Software Solutions Inc. All rights reserved.
+**Made with by Firefly Software Solutions Inc**
+Copyright 2025 Firefly Software Solutions Inc. All rights reserved.

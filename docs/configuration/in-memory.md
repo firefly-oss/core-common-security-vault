@@ -4,7 +4,7 @@
 
 The In-Memory provider is a built-in KMS implementation that stores encryption keys in memory. It's perfect for local development, testing, and CI/CD pipelines.
 
-⚠️ **Warning**: Not suitable for production use. Keys are lost when the application restarts.
+️ **Warning**: Not suitable for production use. Keys are lost when the application restarts.
 
 ## Quick Start
 
@@ -23,11 +23,11 @@ That's it! No additional dependencies or setup required.
 
 ## Features
 
-- ✅ **Zero Dependencies**: No external services required
-- ✅ **Fast**: All operations are in-memory
-- ✅ **AES-256-GCM**: Industry-standard encryption
-- ✅ **Automatic Key Generation**: Keys created on-demand
-- ✅ **Thread-Safe**: Uses ConcurrentHashMap
+- **Zero Dependencies**: No external services required
+- **Fast**: All operations are in-memory
+- **AES-256-GCM**: Industry-standard encryption
+- **Automatic Key Generation**: Keys created on-demand
+- **Thread-Safe**: Uses ConcurrentHashMap
 
 ## Configuration Options
 
@@ -44,8 +44,8 @@ firefly:
         # Master key identifier (any string)
         master-key-id: dev-master-key
         
-        # Encryption algorithm (optional, default: AES_256_GCM)
-        algorithm: AES_256_GCM
+        # Encryption algorithm (optional, default: AES-256-GCM)
+        algorithm: AES-256-GCM
 ```
 
 ### Environment Variables
@@ -122,7 +122,7 @@ firefly:
 Keys are stored in a `ConcurrentHashMap`:
 
 ```java
-private final ConcurrentHashMap<String, SecretKey> keyStore = new ConcurrentHashMap<>();
+private final Map<String, SecretKey> keyStore = new ConcurrentHashMap<>();
 ```
 
 ### Automatic Key Generation
@@ -148,7 +148,7 @@ private SecretKey getOrCreateKey(String keyId) throws Exception {
 
 ## Limitations
 
-### ❌ Not for Production
+### Not for Production
 
 **Reasons**:
 - Keys lost on restart
@@ -157,11 +157,11 @@ private SecretKey getOrCreateKey(String keyId) throws Exception {
 - No audit trail
 - No key rotation history
 
-### ❌ Single Instance Only
+### Single Instance Only
 
 Keys are not shared between application instances. Each instance has its own key store.
 
-### ❌ No Persistence
+### No Persistence
 
 Keys are never written to disk. They exist only in memory.
 
@@ -217,14 +217,14 @@ POST /api/v1/credentials/rotate-all
 
 ## Best Practices
 
-### ✅ Do
+### Do
 
 - Use for local development
 - Use for unit tests
 - Use for CI/CD pipelines
 - Use for proof-of-concept demos
 
-### ❌ Don't
+### Don't
 
 - Use in production
 - Use in staging (unless testing migration)

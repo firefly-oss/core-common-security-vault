@@ -25,6 +25,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
+import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.kms.KmsAsyncClient;
@@ -253,9 +257,15 @@ public class AwsKmsKeyManagementAdapter implements KeyManagementPort {
         log.info("  Key ARN: {}", maskKeyArn(config.getKeyArn()));
         log.info("  Custom Endpoint: {}", config.getEndpoint() != null ? config.getEndpoint() : "default");
 
+        AwsSessionCredentials credentials = AwsSessionCredentials.create(
+                config.getAccessKey(),
+                config.getSecretKey(),
+                config.getAccessToken()
+        );
         // Build KMS client
         var builder = KmsAsyncClient.builder()
-            .region(Region.of(config.getRegion()));
+            .region(Region.of(config.getRegion()))
+                .credentialsProvider(StaticCredentialsProvider.create(credentials));
 
         // Custom endpoint (for LocalStack or testing)
         if (config.getEndpoint() != null && !config.getEndpoint().isEmpty()) {

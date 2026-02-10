@@ -152,8 +152,8 @@ The system validates keys on startup:
 public void validateConfiguration() {
     keyManagementPort.validateKey(masterKeyId)
         .subscribe(
-            valid -> log.info("✅ Master key validated"),
-            error -> log.error("❌ Master key validation failed", error)
+            valid -> log.info("Master key validated"),
+            error -> log.error("Master key validation failed", error)
         );
 }
 ```
@@ -162,58 +162,58 @@ public void validateConfiguration() {
 
 ### Authentication
 
-Configure Spring Security:
+Authentication and authorization are managed by the **Istio service mesh**, not Spring Security directly. The `SecurityConfig` class permits all exchanges and relies on Istio for:
 
-```yaml
-spring:
-  security:
-    user:
-      name: ${ADMIN_USERNAME}
-      password: ${ADMIN_PASSWORD}
-```
+- **mTLS** between services
+- **JWT validation**
+- **Authorization policies**
+- **CORS policies**
 
-### Authorization
-
-Role-based access control (RBAC):
+Spring Security is configured only for security headers (XSS protection, clickjacking prevention via X-Frame-Options DENY, HSTS) and provides a `BCryptPasswordEncoder(12)` bean for internal use.
 
 ```java
-@PreAuthorize("hasRole('ADMIN')")
-public Mono<Credential> deleteCredential(UUID id) {
-    // Only admins can delete
-}
-
-@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-public Mono<Credential> getCredential(UUID id) {
-    // Admins and users can read
-}
+// SecurityConfig.java - permits all exchanges, Istio handles auth
+.authorizeExchange(exchanges -> exchanges
+    .anyExchange().permitAll()
+)
 ```
 
-### Credential Sharing
+### Application-Level Access Control
 
-Share credentials with specific users:
+The `AccessControlService` provides application-level access decisions using `AccessRequest` records:
+
+```java
+record AccessRequest(String userId, String serviceName, String ipAddress,
+    String environment, boolean hasApproval, String reason) {}
+record AccessDecision(boolean allowed, String denyReason) {}
+```
+
+Access control checks IP whitelisting, service whitelisting, approval requirements for sensitive credentials, and lockout after failed attempts.
+
+### Credential Decryption
+
+Decrypt a credential value with access control and audit logging:
 
 ```bash
-POST /api/v1/credentials/{id}/share
-{
-  "userId": "user-123",
-  "permission": "READ",
-  "expiresAt": "2025-12-31T23:59:59Z"
-}
+POST /api/v1/credentials/{id}/decrypt
 ```
+
+Headers extracted for access control: `X-User-Id`, `X-Forwarded-User`, `X-Source-Service`, `X-Forwarded-Service`, `X-Forwarded-For`.
 
 ## Audit Logging
 
 ### Audit Events
 
-All operations are logged:
+All operations are logged via `CredentialAuditService`:
 
 - Credential created
-- Credential read
+- Credential read (access)
 - Credential updated
 - Credential deleted
 - Credential rotated
-- Credential shared
-- Share revoked
+- Credential decrypted
+- Failed access attempts
+- Denied access attempts
 
 ### Audit Log Format
 
@@ -233,11 +233,11 @@ All operations are logged:
 }
 ```
 
-### Query Audit Logs
+### Audit Log Storage
 
-```bash
-GET /api/v1/credentials/{id}/audit-logs?startDate=2025-10-01&endDate=2025-10-31
-```
+Audit logs are stored in the `credential_access_logs` table with fields including: `access_type`, `accessed_by`, `accessed_by_user_id`, `accessed_by_service`, `access_ip`, `access_result`, `access_reason`, `decryption_successful`, `error_message`, and `access_duration_ms`.
+
+Note: There is currently no dedicated REST endpoint for querying audit logs. Audit data can be accessed directly from the database.
 
 ## Network Security
 
@@ -269,7 +269,7 @@ spring:
 
 ### Never Hardcode Secrets
 
-❌ **Bad**:
+**Bad**:
 ```yaml
 firefly:
   security:
@@ -278,7 +278,7 @@ firefly:
         master-key-id: arn:aws:kms:us-east-1:123456789012:key/12345678
 ```
 
-✅ **Good**:
+**Good**:
 ```yaml
 firefly:
   security:
@@ -305,45 +305,33 @@ export DB_PASSWORD=strong-password-here
 
 ### Circuit Breaker
 
-Prevents cascading failures:
-
-```yaml
-firefly:
-  security:
-    vault:
-      resilience:
-        circuit-breaker:
-          failure-rate-threshold: 50
-          wait-duration-in-open-state: 60
-```
+Prevents cascading failures when KMS is unavailable. Configured in `ResilienceConfiguration` with:
+- 50% failure rate threshold
+- 60-second wait duration in open state
+- Sliding window of 10 calls, minimum 5 calls
+- 3 permitted calls in half-open state
 
 ### Rate Limiting
 
-Prevents abuse:
+Prevents abuse at two levels:
+
+1. **KMS operations** (Resilience4j): 100 calls per second, configured in `ResilienceConfiguration`
+2. **Web layer** (RateLimitingFilter): Configurable per-client rate limiting via:
 
 ```yaml
 firefly:
   security:
     vault:
-      resilience:
-        rate-limiter:
-          limit-for-period: 100
-          limit-refresh-period: 1
+      access-control:
+        enable-rate-limiting: true
+        rate-limit-per-minute: 100
 ```
 
 ### Retry with Backoff
 
-Handles transient failures:
-
-```yaml
-firefly:
-  security:
-    vault:
-      resilience:
-        retry:
-          max-attempts: 3
-          wait-duration: 1
-```
+Handles transient KMS failures. Configured in `ResilienceConfiguration` with:
+- 3 max attempts
+- Exponential backoff starting at 1 second with multiplier of 2.0
 
 ## Compliance
 
@@ -372,8 +360,8 @@ firefly:
 
 Never use IN_MEMORY provider in production:
 
-✅ **Production**: AWS KMS, Azure Key Vault, Google Cloud KMS, HashiCorp Vault  
-❌ **Production**: IN_MEMORY
+**Production**: AWS KMS, Azure Key Vault, Google Cloud KMS, HashiCorp Vault  
+**Production**: IN_MEMORY
 
 ### 2. Enable Key Rotation
 
@@ -409,11 +397,7 @@ Set up alerts for:
 
 ### 5. Regular Audits
 
-Review audit logs regularly:
-
-```bash
-GET /api/v1/audit-logs?action=DELETE&startDate=2025-10-01
-```
+Review audit logs regularly via direct database queries on the `credential_access_logs` table or through monitoring dashboards.
 
 ## Security Checklist
 

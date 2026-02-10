@@ -79,14 +79,18 @@ gcloud iam service-accounts keys create ~/firefly-sa-key.json \
 
 ### 5. Configure Application
 
+Note: The Google Cloud KMS adapter uses a different property prefix (`firefly.security.vault.kms.provider`) than other adapters (`firefly.security.vault.encryption.provider`).
+
 ```yaml
 firefly:
   security:
     vault:
-      encryption:
+      kms:
         provider: GOOGLE_CLOUD_KMS
+
+      encryption:
         master-key-id: firefly-encryption-key
-        
+
         google-cloud-kms:
           project-id: my-gcp-project
           location-id: global
@@ -109,10 +113,12 @@ export GOOGLE_APPLICATION_CREDENTIALS=/path/to/firefly-sa-key.json
 firefly:
   security:
     vault:
-      encryption:
+      kms:
         provider: GOOGLE_CLOUD_KMS
+
+      encryption:
         master-key-id: firefly-encryption-key
-        
+
         google-cloud-kms:
           # GCP project ID (required)
           project-id: my-gcp-project

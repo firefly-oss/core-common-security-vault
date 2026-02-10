@@ -43,10 +43,10 @@ az ad sp create-for-rbac \
 
 # Output:
 # {
-#   "appId": "12345678-1234-1234-1234-123456789012",
-#   "displayName": "firefly-security-vault",
-#   "password": "your-client-secret",
-#   "tenant": "87654321-4321-4321-4321-210987654321"
+# "appId": "12345678-1234-1234-1234-123456789012",
+# "displayName": "firefly-security-vault",
+# "password": "your-client-secret",
+# "tenant": "87654321-4321-4321-4321-210987654321"
 # }
 ```
 
@@ -285,13 +285,13 @@ Monitor in Azure Portal:
 
 ## Security Best Practices
 
-1. ✅ Use managed identity when possible
-2. ✅ Enable soft delete and purge protection
-3. ✅ Use private endpoints
-4. ✅ Enable diagnostic logging
-5. ✅ Rotate keys regularly
-6. ✅ Use RBAC instead of access policies
-7. ✅ Separate keys for dev/staging/prod
+1. Use managed identity when possible
+2. Enable soft delete and purge protection
+3. Use private endpoints
+4. Enable diagnostic logging
+5. Rotate keys regularly
+6. Use RBAC instead of access policies
+7. Separate keys for dev/staging/prod
 
 ## Next Steps
 

@@ -2,19 +2,27 @@
 
 This directory contains KMS (Key Management System) provider implementations for the Security Vault.
 
+Note: The actual adapter implementations are located in the `adapters` package:
+`common-platform-security-vault-core/src/main/java/com/firefly/common/security/vault/core/adapters/`
+
 ## Current Status
 
-✅ **InMemoryKmsProvider** - Implemented (for development/testing only)
-⚠️ **AWS KMS Provider** - Requires implementation + AWS SDK dependency
-⚠️ **Azure Key Vault Provider** - Requires implementation + Azure SDK dependency
-⚠️ **HashiCorp Vault Provider** - Requires implementation + Vault SDK dependency
-⚠️ **Google Cloud KMS Provider** - Requires implementation + GCP SDK dependency
+All providers implement the `KeyManagementPort` interface (not `KmsProvider`).
+
+- **InMemoryKeyManagementAdapter** - Implemented (for development/testing only)
+- **AwsKmsKeyManagementAdapter** - Implemented (AWS KMS SDK integration)
+- **AzureKeyVaultKeyManagementAdapter** - Implemented (Azure Key Vault SDK integration)
+- **HashiCorpVaultKeyManagementAdapter** - Implemented (Vault Transit Engine integration)
+- **GoogleCloudKmsKeyManagementAdapter** - Implemented (Google Cloud KMS SDK integration)
+- **ResilientKeyManagementAdapter** - Decorator that adds Circuit Breaker, Rate Limiter, and Retry patterns
 
 ## Implementation Instructions
 
 ### 1. AWS KMS Provider
 
-#### Add Dependencies to `common-platform-security-vault-core/pom.xml`:
+**Status**: Implemented as `AwsKmsKeyManagementAdapter` in the `adapters` package.
+
+#### Dependencies in `common-platform-security-vault-core/pom.xml`:
 
 ```xml
 <dependency>
@@ -29,17 +37,17 @@ This directory contains KMS (Key Management System) provider implementations for
 </dependency>
 ```
 
-#### Create `AwsKmsProvider.java`:
+#### Implementation: `AwsKmsKeyManagementAdapter.java`
 
 ```java
 @Slf4j
 @Component
 @ConditionalOnProperty(
     prefix = "firefly.security.vault.encryption",
-    name = "kms-provider",
+    name = "provider",
     havingValue = "AWS_KMS"
 )
-public class AwsKmsProvider implements KmsProvider {
+public class AwsKmsKeyManagementAdapter implements KeyManagementPort {
     
     private final KmsAsyncClient kmsClient;
     private final SecurityVaultProperties properties;
@@ -125,15 +133,17 @@ public class AwsKmsProvider implements KmsProvider {
     }
     
     @Override
-    public KmsType getProviderType() {
-        return KmsType.AWS_KMS;
+    public ProviderType getProviderType() {
+        return ProviderType.AWS_KMS;
     }
 }
 ```
 
 ### 2. Azure Key Vault Provider
 
-#### Add Dependencies:
+**Status**: Implemented as `AzureKeyVaultKeyManagementAdapter` in the `adapters` package.
+
+#### Dependencies:
 
 ```xml
 <dependency>
@@ -148,17 +158,17 @@ public class AwsKmsProvider implements KmsProvider {
 </dependency>
 ```
 
-#### Create `AzureKeyVaultProvider.java`:
+#### Implementation: `AzureKeyVaultKeyManagementAdapter.java`
 
 ```java
 @Slf4j
 @Component
 @ConditionalOnProperty(
     prefix = "firefly.security.vault.encryption",
-    name = "kms-provider",
+    name = "provider",
     havingValue = "AZURE_KEY_VAULT"
 )
-public class AzureKeyVaultProvider implements KmsProvider {
+public class AzureKeyVaultKeyManagementAdapter implements KeyManagementPort {
     
     private final CryptographyAsyncClient cryptoClient;
     private final SecurityVaultProperties properties;
@@ -196,15 +206,17 @@ public class AzureKeyVaultProvider implements KmsProvider {
     // Implement other methods similarly...
     
     @Override
-    public KmsType getProviderType() {
-        return KmsType.AZURE_KEY_VAULT;
+    public ProviderType getProviderType() {
+        return ProviderType.AZURE_KEY_VAULT;
     }
 }
 ```
 
 ### 3. HashiCorp Vault Provider
 
-#### Add Dependencies:
+**Status**: Implemented as `HashiCorpVaultKeyManagementAdapter` in the `adapters` package.
+
+#### Dependencies:
 
 ```xml
 <dependency>
@@ -214,17 +226,17 @@ public class AzureKeyVaultProvider implements KmsProvider {
 </dependency>
 ```
 
-#### Create `HashiCorpVaultProvider.java`:
+#### Implementation: `HashiCorpVaultKeyManagementAdapter.java`
 
 ```java
 @Slf4j
 @Component
 @ConditionalOnProperty(
     prefix = "firefly.security.vault.encryption",
-    name = "kms-provider",
+    name = "provider",
     havingValue = "HASHICORP_VAULT"
 )
-public class HashiCorpVaultProvider implements KmsProvider {
+public class HashiCorpVaultKeyManagementAdapter implements KeyManagementPort {
     
     private final Vault vault;
     
@@ -241,8 +253,8 @@ public class HashiCorpVaultProvider implements KmsProvider {
     // Implement KmsProvider methods using Vault Transit engine
     
     @Override
-    public KmsType getProviderType() {
-        return KmsType.HASHICORP_VAULT;
+    public ProviderType getProviderType() {
+        return ProviderType.HASHICORP_VAULT;
     }
 }
 ```
@@ -256,12 +268,12 @@ firefly:
   security:
     vault:
       encryption:
-        kms-provider: AWS_KMS  # Options: IN_MEMORY, AWS_KMS, AZURE_KEY_VAULT, HASHICORP_VAULT
-        
+        provider: AWS_KMS  # Options: IN_MEMORY, AWS_KMS, AZURE_KEY_VAULT, HASHICORP_VAULT, GOOGLE_CLOUD_KMS
+
         aws-kms:
           region: us-east-1
           key-arn: arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-          
+
         azure-key-vault:
           vault-url: https://my-vault.vault.azure.net/
           key-name: my-encryption-key
@@ -269,6 +281,8 @@ firefly:
           client-id: ${AZURE_CLIENT_ID}
           client-secret: ${AZURE_CLIENT_SECRET}
 ```
+
+Note: The `kms-provider` property is deprecated. Use `provider` instead.
 
 ## Testing
 
@@ -288,8 +302,8 @@ Each provider should have corresponding integration tests using:
 
 ## Production Checklist
 
-- [ ] Add appropriate KMS SDK dependencies
-- [ ] Implement provider class with all interface methods
+- [x] Add appropriate KMS SDK dependencies
+- [x] Implement adapter classes with all `KeyManagementPort` interface methods
 - [ ] Add integration tests
 - [ ] Configure proper IAM/RBAC permissions
 - [ ] Enable key rotation policies

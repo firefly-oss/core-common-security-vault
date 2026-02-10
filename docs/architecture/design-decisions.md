@@ -25,15 +25,15 @@ Adopt **Hexagonal Architecture** (Ports and Adapters pattern).
 ### Rationale
 
 **Pros**:
-- ✅ Clear separation of concerns
-- ✅ Easy to test (mock ports instead of concrete implementations)
-- ✅ Flexible - can swap adapters without changing business logic
-- ✅ Framework-independent domain layer
+- Clear separation of concerns
+- Easy to test (mock ports instead of concrete implementations)
+- Flexible - can swap adapters without changing business logic
+- Framework-independent domain layer
 
 **Cons**:
-- ❌ More initial complexity
-- ❌ More files and interfaces
-- ❌ Learning curve for developers unfamiliar with the pattern
+- More initial complexity
+- More files and interfaces
+- Learning curve for developers unfamiliar with the pattern
 
 ### Consequences
 
@@ -61,15 +61,15 @@ Use **Spring WebFlux** with **Project Reactor** for reactive programming.
 ### Rationale
 
 **Pros**:
-- ✅ Non-blocking I/O for better resource utilization
-- ✅ Handles high concurrency with fewer threads
-- ✅ Natural fit for async KMS operations
-- ✅ Backpressure support
+- Non-blocking I/O for better resource utilization
+- Handles high concurrency with fewer threads
+- Natural fit for async KMS operations
+- Backpressure support
 
 **Cons**:
-- ❌ Steeper learning curve
-- ❌ Debugging can be more complex
-- ❌ Not all libraries support reactive
+- Steeper learning curve
+- Debugging can be more complex
+- Not all libraries support reactive
 
 ### Consequences
 
@@ -106,14 +106,14 @@ Implement **envelope encryption** pattern.
 4. Store encrypted credential + encrypted DEK
 
 **Pros**:
-- ✅ Reduced KMS API calls (better performance, lower cost)
-- ✅ Unique key per credential (better security)
-- ✅ Fast local encryption/decryption
-- ✅ Master key never leaves KMS
+- Reduced KMS API calls (better performance, lower cost)
+- Unique key per credential (better security)
+- Fast local encryption/decryption
+- Master key never leaves KMS
 
 **Cons**:
-- ❌ More complex implementation
-- ❌ Larger storage footprint
+- More complex implementation
+- Larger storage footprint
 
 ### Consequences
 
@@ -140,15 +140,15 @@ Use **AES-256-GCM** (Galois/Counter Mode).
 ### Rationale
 
 **Pros**:
-- ✅ Industry standard (NIST approved)
-- ✅ Authenticated encryption (detects tampering)
-- ✅ Fast (hardware acceleration available)
-- ✅ 256-bit key size (strong security)
-- ✅ 128-bit authentication tag
+- Industry standard (NIST approved)
+- Authenticated encryption (detects tampering)
+- Fast (hardware acceleration available)
+- 256-bit key size (strong security)
+- 128-bit authentication tag
 
 **Cons**:
-- ❌ IV must never be reused with same key
-- ❌ Requires careful implementation
+- IV must never be reused with same key
+- Requires careful implementation
 
 ### Consequences
 
@@ -186,14 +186,14 @@ public class AwsKmsKeyManagementAdapter implements KeyManagementPort {
 ```
 
 **Pros**:
-- ✅ Only load beans for configured provider
-- ✅ Smaller application footprint
-- ✅ Faster startup time
-- ✅ No unnecessary dependencies
+- Only load beans for configured provider
+- Smaller application footprint
+- Faster startup time
+- No unnecessary dependencies
 
 **Cons**:
-- ❌ More complex configuration
-- ❌ Potential runtime errors if SDK missing
+- More complex configuration
+- Potential runtime errors if SDK missing
 
 ### Consequences
 
@@ -220,14 +220,14 @@ Use **Resilience4j** for Circuit Breaker, Rate Limiter, and Retry patterns.
 ### Rationale
 
 **Pros**:
-- ✅ Lightweight library
-- ✅ Reactive support (works with Project Reactor)
-- ✅ Comprehensive metrics
-- ✅ Easy configuration
+- Lightweight library
+- Reactive support (works with Project Reactor)
+- Comprehensive metrics
+- Easy configuration
 
 **Cons**:
-- ❌ Additional dependency
-- ❌ Adds complexity
+- Additional dependency
+- Adds complexity
 
 ### Consequences
 
@@ -255,15 +255,15 @@ Use **R2DBC** (Reactive Relational Database Connectivity) with PostgreSQL.
 ### Rationale
 
 **Pros**:
-- ✅ Reactive, non-blocking database access
-- ✅ Consistent with Spring WebFlux
-- ✅ Better resource utilization
-- ✅ PostgreSQL support
+- Reactive, non-blocking database access
+- Consistent with Spring WebFlux
+- Better resource utilization
+- PostgreSQL support
 
 **Cons**:
-- ❌ Less mature than JDBC
-- ❌ Limited ORM features
-- ❌ Smaller ecosystem
+- Less mature than JDBC
+- Limited ORM features
+- Smaller ecosystem
 
 ### Consequences
 
@@ -290,13 +290,13 @@ Use **Flyway** for database migrations.
 ### Rationale
 
 **Pros**:
-- ✅ Version-controlled migrations
-- ✅ Automatic execution on startup
-- ✅ Rollback support
-- ✅ Works with R2DBC
+- Version-controlled migrations
+- Automatic execution on startup
+- Rollback support
+- Works with R2DBC
 
 **Cons**:
-- ❌ Migrations run synchronously (blocking)
+- Migrations run synchronously (blocking)
 
 ### Consequences
 
@@ -330,14 +330,14 @@ Use **multi-module Maven** structure.
 - `sdk` - Client library
 
 **Pros**:
-- ✅ Clear separation of concerns
-- ✅ Reusable modules
-- ✅ Independent versioning
-- ✅ Smaller artifacts
+- Clear separation of concerns
+- Reusable modules
+- Independent versioning
+- Smaller artifacts
 
 **Cons**:
-- ❌ More complex build
-- ❌ Dependency management overhead
+- More complex build
+- Dependency management overhead
 
 ### Consequences
 
@@ -364,18 +364,18 @@ Use **Micrometer** with **Spring Boot Actuator**.
 ### Rationale
 
 **Pros**:
-- ✅ Vendor-neutral metrics facade
-- ✅ Supports Prometheus, Grafana, etc.
-- ✅ Built-in Spring Boot integration
-- ✅ Custom metrics support
+- Vendor-neutral metrics facade
+- Supports Prometheus, Grafana, etc.
+- Built-in Spring Boot integration
+- Custom metrics support
 
 **Cons**:
-- ❌ Additional dependency
+- Additional dependency
 
 ### Consequences
 
 - Metrics exposed at `/actuator/prometheus`
-- Custom metrics in `KeyManagementMetrics`
+- Custom metrics in `SecurityVaultMetrics`
 - Resilience4j metrics automatically exported
 
 ---

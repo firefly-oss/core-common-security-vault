@@ -6,7 +6,7 @@ This guide will help you set up your development environment and contribute to t
 
 ## Prerequisites
 
-- **Java 21** or higher
+- **Java 25** or higher
 - **Maven 3.8+**
 - **PostgreSQL 14+** (or Docker)
 - **Git**
@@ -118,7 +118,7 @@ common-platform-security-vault/
 │   │   └── com/firefly/common/security/vault/web/
 │   │       ├── controllers/       # REST controllers
 │   │       ├── exception/         # Exception handlers
-│   │       └── Application.java   # Main application
+│   │       └── CommonPlatformSecurityVaultApplication.java   # Main application
 │   └── src/test/java/             # Integration tests
 │
 └── common-platform-security-vault-sdk/
@@ -248,7 +248,7 @@ docker build -t firefly-security-vault:dev .
 ### IntelliJ IDEA
 
 1. Create a new **Spring Boot** run configuration
-2. Set **Main class**: `com.firefly.common.security.vault.web.Application`
+2. Set **Main class**: `com.firefly.common.security.vault.web.CommonPlatformSecurityVaultApplication`
 3. Set **VM options**: `-Dspring.profiles.active=dev`
 4. Set **Working directory**: `$MODULE_WORKING_DIR$`
 5. Click **Debug**
@@ -265,7 +265,7 @@ Create `.vscode/launch.json`:
       "type": "java",
       "name": "Debug Firefly Security Vault",
       "request": "launch",
-      "mainClass": "com.firefly.common.security.vault.web.Application",
+      "mainClass": "com.firefly.common.security.vault.web.CommonPlatformSecurityVaultApplication",
       "projectName": "common-platform-security-vault-web",
       "args": "--spring.profiles.active=dev"
     }
@@ -292,14 +292,15 @@ public class MyKmsKeyManagementAdapter implements KeyManagementPort {
     }
     
     @Override
-    public Mono<byte[]> encrypt(byte[] plaintext, String keyId, Map<String, String> context) {
+    public Mono<EncryptionResult> encrypt(byte[] plaintext, String keyId, String context) {
         return Mono.fromCallable(() -> {
             // Implement encryption
-            return kmsClient.encrypt(plaintext, keyId);
+            byte[] ciphertext = kmsClient.encrypt(plaintext, keyId);
+            return new EncryptionResult(ciphertext, keyId, "MY_KMS_AES_256", context);
         });
     }
-    
-    // Implement other methods...
+
+    // Implement other methods: decrypt, generateDataKey, rotateKey, validateKey, getProviderType...
 }
 ```
 
@@ -330,9 +331,9 @@ public static class MyKmsProperties {
 @Test
 void shouldEncryptWithMyKms() {
     MyKmsKeyManagementAdapter adapter = new MyKmsKeyManagementAdapter(properties);
-    
-    StepVerifier.create(adapter.encrypt("test".getBytes(), "key-id", Map.of()))
-        .expectNextMatches(encrypted -> encrypted != null)
+
+    StepVerifier.create(adapter.encrypt("test".getBytes(), "key-id", "test-context"))
+        .expectNextMatches(result -> result != null && result.ciphertext() != null)
         .verifyComplete();
 }
 ```
@@ -390,7 +391,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
         with:
-          java-version: '21'
+          java-version: '25'
       - run: mvn clean verify
 ```
 

@@ -2,9 +2,9 @@
 
 Welcome to the comprehensive documentation for the Firefly Security Vault service.
 
-## 📚 Documentation Structure
+## Documentation Structure
 
-### 🏗️ Architecture
+### Architecture
 
 Understand the design and structure of the Security Vault:
 
@@ -13,7 +13,7 @@ Understand the design and structure of the Security Vault:
 - [**Data Model**](architecture/data-model.md) - Database schema and entity relationships
 - [**Design Decisions**](architecture/design-decisions.md) - Key architectural decisions and rationale
 
-### ⚙️ Configuration
+### Configuration
 
 Configure the Security Vault for different environments and KMS providers:
 
@@ -24,7 +24,7 @@ Configure the Security Vault for different environments and KMS providers:
 - [**HashiCorp Vault**](configuration/hashicorp-vault.md) - HashiCorp Vault Transit Engine configuration
 - [**Google Cloud KMS**](configuration/google-cloud-kms.md) - Google Cloud KMS configuration
 
-### 🚀 Operations
+### Operations
 
 Deploy, monitor, and maintain the Security Vault in production:
 
@@ -34,7 +34,7 @@ Deploy, monitor, and maintain the Security Vault in production:
 - [**Backup & Recovery**](operations/backup-recovery.md) - Data backup and disaster recovery
 - [**Performance Tuning**](operations/performance.md) - Optimization and scaling
 
-### 🔌 API Reference
+### API Reference
 
 Complete API documentation and examples:
 
@@ -44,7 +44,7 @@ Complete API documentation and examples:
 - [**Audit API**](api/audit.md) - Audit log endpoints
 - [**API Examples**](api/examples.md) - Common use cases and code samples
 
-### 🔒 Security
+### Security
 
 Security features and best practices:
 
@@ -54,7 +54,7 @@ Security features and best practices:
 - [**Audit & Compliance**](security/audit-compliance.md) - Audit trails and compliance reporting
 - [**Best Practices**](security/best-practices.md) - Security recommendations
 
-### 👨‍💻 Development
+### Development
 
 Guides for developers and contributors:
 
@@ -64,7 +64,7 @@ Guides for developers and contributors:
 - [**Code Style**](development/code-style.md) - Coding standards and conventions
 - [**Release Process**](development/release-process.md) - Versioning and release workflow
 
-### 📖 Guides
+### Guides
 
 Step-by-step guides for common tasks:
 
@@ -73,7 +73,7 @@ Step-by-step guides for common tasks:
 - [**Use Cases**](guides/use-cases.md) - Real-world usage examples
 - [**FAQ**](guides/faq.md) - Frequently asked questions
 
-## 🎯 Quick Links
+## Quick Links
 
 ### For Developers
 
@@ -93,13 +93,13 @@ Step-by-step guides for common tasks:
 - [Encryption Details](security/encryption.md)
 - [Compliance Features](security/audit-compliance.md)
 
-## 📝 Additional Resources
+## Additional Resources
 
 - [GitHub Repository](https://github.com/firefly-oss/common-platform-security-vault)
 - [Issue Tracker](https://github.com/firefly-oss/common-platform-security-vault/issues)
 - [Firefly Website](https://getfirefly.io)
 
-## 🆘 Getting Help
+## Getting Help
 
 If you can't find what you're looking for:
 
@@ -110,9 +110,9 @@ If you can't find what you're looking for:
 
 ---
 
-**Made with ❤️ by Firefly Software Solutions Inc**
+**Made with by Firefly Software Solutions Inc**
 
-Copyright © 2025 Firefly Software Solutions Inc. All rights reserved.
+Copyright 2025 Firefly Software Solutions Inc. All rights reserved.
 
 **Last Updated**: October 31, 2025
 **Version**: 1.0.0-SNAPSHOT

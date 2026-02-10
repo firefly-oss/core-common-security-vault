@@ -8,11 +8,11 @@ The Firefly Security Vault supports multiple Key Management Service (KMS) provid
 
 | Provider | Status | Use Case | Guide |
 |----------|--------|----------|-------|
-| **In-Memory** | ✅ Production-Ready | Development, Testing | [Guide](in-memory.md) |
-| **AWS KMS** | ✅ Production-Ready | AWS Cloud | [Guide](aws-kms.md) |
-| **Azure Key Vault** | ✅ Production-Ready | Azure Cloud | [Guide](azure-key-vault.md) |
-| **HashiCorp Vault** | ✅ Production-Ready | On-Premise, Hybrid | [Guide](hashicorp-vault.md) |
-| **Google Cloud KMS** | ✅ Production-Ready | Google Cloud | [Guide](google-cloud-kms.md) |
+| **In-Memory** | Production-Ready | Development, Testing | [Guide](in-memory.md) |
+| **AWS KMS** | Production-Ready | AWS Cloud | [Guide](aws-kms.md) |
+| **Azure Key Vault** | Production-Ready | Azure Cloud | [Guide](azure-key-vault.md) |
+| **HashiCorp Vault** | Production-Ready | On-Premise, Hybrid | [Guide](hashicorp-vault.md) |
+| **Google Cloud KMS** | Production-Ready | Google Cloud | [Guide](google-cloud-kms.md) |
 
 ## Quick Start
 
@@ -97,55 +97,57 @@ firefly:
       encryption:
         # Provider type (required)
         provider: IN_MEMORY  # IN_MEMORY, AWS_KMS, AZURE_KEY_VAULT, HASHICORP_VAULT, GOOGLE_CLOUD_KMS
-        
+
         # Master key identifier (required)
         master-key-id: default-master-key
-        
-        # Encryption algorithm (optional, default: AES_256_GCM)
-        algorithm: AES_256_GCM
-        
-        # Enable automatic key rotation (optional, default: false)
+
+        # Encryption algorithm (optional, default: AES-256-GCM)
+        algorithm: AES-256-GCM
+
+        # Enable envelope encryption (optional, default: false)
+        envelope-encryption: false
+
+      # Rotation configuration (separate section from encryption)
+      rotation:
+        # Enable automatic rotation (optional, default: false)
         auto-rotation-enabled: false
-        
-        # Key rotation interval in days (optional, default: 90)
-        rotation-interval-days: 90
+
+        # Default rotation interval in days (optional, default: 90)
+        default-rotation-days: 90
+
+        # Warning period before expiration in days (optional, default: 7)
+        warning-before-days: 7
+
+        # Maximum versions to keep per credential (optional, default: 10)
+        max-versions-to-keep: 10
 ```
 
 ### Resilience Configuration
 
-Enable resilience patterns (Circuit Breaker, Rate Limiter, Retry):
+Resilience patterns (Circuit Breaker, Rate Limiter, Retry) are configured via the `ResilienceConfiguration` bean in the `core` module with hardcoded defaults. These are **not** configurable via `application.yaml` properties.
+
+**Default resilience settings** (defined in `ResilienceConfiguration.java`):
+
+- **Circuit Breaker**: 50% failure rate threshold, 60s wait in open state, sliding window of 10 calls, minimum 5 calls, 3 permitted calls in half-open state
+- **Rate Limiter**: 100 calls per 1-second period, 5-second timeout
+- **Retry**: 3 max attempts, exponential backoff starting at 1s with multiplier of 2.0
+
+The `ResilientKeyManagementAdapter` wraps any `KeyManagementPort` implementation with these resilience patterns applied in order: Retry, Rate Limiter, Circuit Breaker.
+
+### Access Control Configuration
+
+Rate limiting for the web layer is configurable:
 
 ```yaml
 firefly:
   security:
     vault:
-      resilience:
-        # Enable resilience patterns (optional, default: true)
-        enabled: true
-        
-        circuit-breaker:
-          # Failure rate threshold (optional, default: 50)
-          failure-rate-threshold: 50
-          
-          # Wait duration in open state in seconds (optional, default: 60)
-          wait-duration-in-open-state: 60
-          
-          # Sliding window size (optional, default: 10)
-          sliding-window-size: 10
-        
-        rate-limiter:
-          # Limit for period (optional, default: 100)
-          limit-for-period: 100
-          
-          # Limit refresh period in seconds (optional, default: 1)
-          limit-refresh-period: 1
-        
-        retry:
-          # Max attempts (optional, default: 3)
-          max-attempts: 3
-          
-          # Wait duration in seconds (optional, default: 1)
-          wait-duration: 1
+      access-control:
+        # Enable rate limiting (optional, default: true)
+        enable-rate-limiting: true
+
+        # Requests per minute per client (optional, default: 100)
+        rate-limit-per-minute: 100
 ```
 
 ## Environment-Specific Configuration
@@ -197,27 +199,24 @@ firefly:
         master-key-id: arn:aws:kms:us-east-1:123456789012:key/prod-key
         aws-kms:
           region: us-east-1
-      
-      resilience:
-        enabled: true
 ```
 
 ## Configuration Validation
 
 The Security Vault validates configuration at startup:
 
-✅ **Valid Configuration**:
+**Valid Configuration**:
 ```
 2025-10-31 10:00:00.000  INFO --- SecurityVaultConfigurationValidator : 
-✅ Security Vault Configuration Validation: PASSED
+Security Vault Configuration Validation: PASSED
 Provider: AWS_KMS
 Master Key ID: arn:aws:kms:us-east-1:123456789012:key/prod-key
 ```
 
-❌ **Invalid Configuration**:
+**Invalid Configuration**:
 ```
 2025-10-31 10:00:00.000 ERROR --- SecurityVaultConfigurationValidator : 
-❌ Security Vault Configuration Validation: FAILED
+Security Vault Configuration Validation: FAILED
 - Provider is required
 - Master Key ID is required for AWS_KMS provider
 ```

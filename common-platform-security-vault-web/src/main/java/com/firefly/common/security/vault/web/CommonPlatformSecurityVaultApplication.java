@@ -17,7 +17,7 @@
 
 package com.firefly.common.security.vault.web;
 
-import com.firefly.common.core.filters.FilterRequest;
+import org.fireflyframework.core.filters.FilterRequest;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -34,7 +34,7 @@ import org.springframework.web.reactive.config.EnableWebFlux;
         scanBasePackages = {
                 "com.firefly.core.plugin",
                 "com.firefly.common.security.vault",
-                "com.firefly.common.web"  // Scan common web library configurations
+                "org.fireflyframework.web"  // Scan common web library configurations
         }
 )
 @EnableWebFlux
