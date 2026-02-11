@@ -17,7 +17,7 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Copy the JAR file
-COPY common-platform-security-vault-web/target/*.jar app.jar
+COPY core-common-security-vault-web/target/*.jar app.jar
 
 # Create non-root user
 RUN addgroup -S firefly && adduser -S firefly -G firefly

@@ -412,8 +412,8 @@ See [Development Guide](../development/README.md) for details.
 ## Still Have Questions?
 
 - [Documentation](../README.md)
-- [GitHub Issues](https://github.com/firefly-oss/common-platform-security-vault/issues)
-- [Discussions](https://github.com/firefly-oss/common-platform-security-vault/discussions)
+- [GitHub Issues](https://github.com/firefly-oss/core-common-security-vault/issues)
+- [Discussions](https://github.com/firefly-oss/core-common-security-vault/discussions)
 - [Email Support](mailto:dev@getfirefly.io)
 - [Website](https://getfirefly.io)
 

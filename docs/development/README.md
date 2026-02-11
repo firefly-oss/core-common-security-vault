@@ -17,8 +17,8 @@ This guide will help you set up your development environment and contribute to t
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-org/common-platform-security-vault.git
-cd common-platform-security-vault
+git clone https://github.com/your-org/core-common-security-vault.git
+cd core-common-security-vault
 ```
 
 ### 2. Start PostgreSQL
@@ -45,7 +45,7 @@ GRANT ALL PRIVILEGES ON DATABASE firefly_vault_dev TO firefly_dev;
 
 ### 3. Configure Application
 
-Create `common-platform-security-vault-web/src/main/resources/application-dev.yaml`:
+Create `core-common-security-vault-web/src/main/resources/application-dev.yaml`:
 
 ```yaml
 spring:
@@ -79,7 +79,7 @@ mvn clean install
 ### 5. Run the Application
 
 ```bash
-cd common-platform-security-vault-web
+cd core-common-security-vault-web
 mvn spring-boot:run -Dspring.profiles.active=dev
 ```
 
@@ -88,8 +88,8 @@ The application will start on `http://localhost:8081`
 ## Project Structure
 
 ```
-common-platform-security-vault/
-├── common-platform-security-vault-models/
+core-common-security-vault/
+├── core-common-security-vault-models/
 │   ├── src/main/java/
 │   │   └── com/firefly/common/security/vault/models/
 │   │       ├── entities/          # JPA/R2DBC entities
@@ -97,12 +97,12 @@ common-platform-security-vault/
 │   └── src/main/resources/
 │       └── db/migration/          # Flyway migrations
 │
-├── common-platform-security-vault-interfaces/
+├── core-common-security-vault-interfaces/
 │   └── src/main/java/
 │       └── com/firefly/common/security/vault/interfaces/
 │           └── dtos/              # Request/Response DTOs
 │
-├── common-platform-security-vault-core/
+├── core-common-security-vault-core/
 │   ├── src/main/java/
 │   │   └── com/firefly/common/security/vault/core/
 │   │       ├── ports/             # Port interfaces
@@ -113,7 +113,7 @@ common-platform-security-vault/
 │   │       └── metrics/           # Metrics collectors
 │   └── src/test/java/             # Unit tests
 │
-├── common-platform-security-vault-web/
+├── core-common-security-vault-web/
 │   ├── src/main/java/
 │   │   └── com/firefly/common/security/vault/web/
 │   │       ├── controllers/       # REST controllers
@@ -121,7 +121,7 @@ common-platform-security-vault/
 │   │       └── CommonPlatformSecurityVaultApplication.java   # Main application
 │   └── src/test/java/             # Integration tests
 │
-└── common-platform-security-vault-sdk/
+└── core-common-security-vault-sdk/
     └── Generated client library
 ```
 
@@ -227,7 +227,7 @@ mvn clean install
 ### Build Specific Module
 
 ```bash
-mvn clean install -pl common-platform-security-vault-core
+mvn clean install -pl core-common-security-vault-core
 ```
 
 ### Skip Tests
@@ -266,7 +266,7 @@ Create `.vscode/launch.json`:
       "name": "Debug Firefly Security Vault",
       "request": "launch",
       "mainClass": "com.firefly.common.security.vault.web.CommonPlatformSecurityVaultApplication",
-      "projectName": "common-platform-security-vault-web",
+      "projectName": "core-common-security-vault-web",
       "args": "--spring.profiles.active=dev"
     }
   ]

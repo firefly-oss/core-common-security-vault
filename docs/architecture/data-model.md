@@ -226,7 +226,7 @@ public enum AccessAction {
 Migrations are managed by Flyway. Migration files are located in:
 
 ```
-common-platform-security-vault-models/src/main/resources/db/migration/
+core-common-security-vault-models/src/main/resources/db/migration/
 ```
 
 ### Migration Files

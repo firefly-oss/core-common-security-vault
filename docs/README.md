@@ -95,8 +95,8 @@ Step-by-step guides for common tasks:
 
 ## Additional Resources
 
-- [GitHub Repository](https://github.com/firefly-oss/common-platform-security-vault)
-- [Issue Tracker](https://github.com/firefly-oss/common-platform-security-vault/issues)
+- [GitHub Repository](https://github.com/firefly-oss/core-common-security-vault)
+- [Issue Tracker](https://github.com/firefly-oss/core-common-security-vault/issues)
 - [Firefly Website](https://getfirefly.io)
 
 ## Getting Help
@@ -104,9 +104,9 @@ Step-by-step guides for common tasks:
 If you can't find what you're looking for:
 
 1. Check the [FAQ](guides/faq.md)
-2. Search [existing issues](https://github.com/firefly-oss/common-platform-security-vault/issues)
+2. Search [existing issues](https://github.com/firefly-oss/core-common-security-vault/issues)
 3. Contact us at [dev@getfirefly.io](mailto:dev@getfirefly.io)
-4. [Open a new issue](https://github.com/firefly-oss/common-platform-security-vault/issues/new)
+4. [Open a new issue](https://github.com/firefly-oss/core-common-security-vault/issues/new)
 
 ---
 

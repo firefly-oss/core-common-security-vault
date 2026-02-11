@@ -222,7 +222,7 @@ The beans are created with `@Qualifier` annotations for the `kms-operations` ins
 - `kmsRetryRegistry` / `kmsRetry`
 
 To customize these values, modify the `ResilienceConfiguration` class in the `core` module:
-`common-platform-security-vault-core/src/main/java/com/firefly/common/security/vault/core/config/ResilienceConfiguration.java`
+`core-common-security-vault-core/src/main/java/com/firefly/common/security/vault/core/config/ResilienceConfiguration.java`
 
 ## Troubleshooting
 

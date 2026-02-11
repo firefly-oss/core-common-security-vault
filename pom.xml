@@ -11,14 +11,14 @@
     </parent>
 
     <groupId>com.firefly</groupId>
-    <artifactId>common-platform-security-vault</artifactId>
+    <artifactId>core-common-security-vault</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>common-platform-security-vault-core</module>
-        <module>common-platform-security-vault-web</module>
-        <module>common-platform-security-vault-interfaces</module>
-        <module>common-platform-security-vault-models</module>
-        <module>common-platform-security-vault-sdk</module>
+        <module>core-common-security-vault-core</module>
+        <module>core-common-security-vault-web</module>
+        <module>core-common-security-vault-interfaces</module>
+        <module>core-common-security-vault-models</module>
+        <module>core-common-security-vault-sdk</module>
     </modules>
 
     <properties>
@@ -27,9 +27,9 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven.compiler.release>${java.version}</maven.compiler.release>
         <fireflyframework.bom.version>26.01.01</fireflyframework.bom.version>
-        <common-platform-security-vault.version>
+        <core-common-security-vault.version>
             1.0.0-SNAPSHOT
-        </common-platform-security-vault.version>
+        </core-common-security-vault.version>
     </properties>
 
     <dependencyManagement>
@@ -44,22 +44,22 @@
             <!-- Internal modules -->
             <dependency>
                 <groupId>com.firefly</groupId>
-                <artifactId>common-platform-security-vault-interfaces</artifactId>
+                <artifactId>core-common-security-vault-interfaces</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.firefly</groupId>
-                <artifactId>common-platform-security-vault-models</artifactId>
+                <artifactId>core-common-security-vault-models</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.firefly</groupId>
-                <artifactId>common-platform-security-vault-core</artifactId>
+                <artifactId>core-common-security-vault-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.firefly</groupId>
-                <artifactId>common-platform-security-vault-web</artifactId>
+                <artifactId>core-common-security-vault-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

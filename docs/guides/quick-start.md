@@ -14,8 +14,8 @@ This guide will help you get the Firefly Security Vault up and running quickly.
 ## Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/your-org/common-platform-security-vault.git
-cd common-platform-security-vault
+git clone https://github.com/your-org/core-common-security-vault.git
+cd core-common-security-vault
 ```
 
 ## Step 2: Configure the Application
@@ -69,7 +69,7 @@ spring:
 mvn clean install
 
 # Run the application
-cd common-platform-security-vault-web
+cd core-common-security-vault-web
 mvn spring-boot:run -Dspring.profiles.active=dev
 ```
 
@@ -232,7 +232,7 @@ server:
 
 - [FAQ](faq.md)
 - [Troubleshooting Guide](../operations/troubleshooting.md)
-- [GitHub Issues](https://github.com/your-org/common-platform-security-vault/issues)
+- [GitHub Issues](https://github.com/your-org/core-common-security-vault/issues)
 
 ## What's Next?
 

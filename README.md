@@ -26,13 +26,13 @@ limitations under the License.
 
 ---
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/firefly-oss/common-platform-security-vault)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/firefly-oss/core-common-security-vault)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/java-25-orange.svg)](https://openjdk.org/projects/jdk/25/)
 [![Spring Boot](https://img.shields.io/badge/spring%20boot-3.5.10-green.svg)](https://spring.io/projects/spring-boot)
 [![Architecture](https://img.shields.io/badge/architecture-hexagonal-blueviolet.svg)](docs/architecture/hexagonal-architecture.md)
-[![Tests](https://img.shields.io/badge/tests-94%20passing-success.svg)](common-platform-security-vault-core/src/test)
-[![Coverage](https://img.shields.io/badge/coverage-85%25-green.svg)](common-platform-security-vault-core/src/test)
+[![Tests](https://img.shields.io/badge/tests-94%20passing-success.svg)](core-common-security-vault-core/src/test)
+[![Coverage](https://img.shields.io/badge/coverage-85%25-green.svg)](core-common-security-vault-core/src/test)
 
 [![Website](https://img.shields.io/badge/website-getfirefly.io-blue)](https://getfirefly.io)
 [![Documentation](https://img.shields.io/badge/docs-comprehensive-brightgreen)](./docs)
@@ -335,8 +335,8 @@ Get the microservice running locally in 5 minutes for development and testing.
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/firefly-oss/common-platform-security-vault.git
-cd common-platform-security-vault
+git clone https://github.com/firefly-oss/core-common-security-vault.git
+cd core-common-security-vault
 ```
 
 ### Step 2: Setup Database
@@ -358,7 +358,7 @@ GRANT ALL PRIVILEGES ON DATABASE firefly_security_vault TO firefly_user;
 
 ### Step 3: Configure Application
 
-Create `common-platform-security-vault-web/src/main/resources/application-local.yml`:
+Create `core-common-security-vault-web/src/main/resources/application-local.yml`:
 
 ```yaml
 spring:
@@ -384,7 +384,7 @@ firefly:
 mvn clean install
 
 # Run the microservice
-cd common-platform-security-vault-web
+cd core-common-security-vault-web
 mvn spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
@@ -1055,17 +1055,17 @@ The microservice uses **Hexagonal Architecture** to achieve:
 ### Module Structure
 
 ```
-common-platform-security-vault/
+core-common-security-vault/
 │
-├── common-platform-security-vault-models/
+├── core-common-security-vault-models/
 │   ├── entities/           # JPA/R2DBC entities
 │   ├── repositories/       # R2DBC repositories
 │   └── migrations/         # Flyway SQL scripts
 │
-├── common-platform-security-vault-interfaces/
+├── core-common-security-vault-interfaces/
 │   └── dtos/              # Data Transfer Objects (CredentialDTO, CredentialVersionDTO, etc.)
 │
-├── common-platform-security-vault-core/
+├── core-common-security-vault-core/
 │   ├── ports/             # Domain interfaces
 │   │   ├── KeyManagementPort.java
 │   │   └── CredentialEncryptionPort.java
@@ -1097,12 +1097,12 @@ common-platform-security-vault/
 │   └── metrics/           # Metrics collectors
 │       └── SecurityVaultMetrics.java
 │
-├── common-platform-security-vault-web/
+├── core-common-security-vault-web/
 │   ├── controllers/       # REST API endpoints
 │   ├── exception/         # Exception handlers
 │   └── CommonPlatformCommonPlatformSecurityVaultApplication.java  # Main class
 │
-└── common-platform-security-vault-sdk/
+└── core-common-security-vault-sdk/
     ├── src/main/resources/api-spec/
     │   └── openapi.yml    # OpenAPI 3.0 specification
     └── target/generated-sources/
@@ -1705,7 +1705,7 @@ The microservice includes an **auto-generated Java SDK** using OpenAPI Generator
 ```xml
 <dependency>
     <groupId>com.firefly</groupId>
-    <artifactId>common-platform-security-vault-sdk</artifactId>
+    <artifactId>core-common-security-vault-sdk</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
@@ -2612,7 +2612,7 @@ The microservice includes **94 unit tests** with **85% code coverage**.
 mvn test
 
 # Run tests for specific module
-mvn test -pl common-platform-security-vault-core
+mvn test -pl core-common-security-vault-core
 
 # Run specific test class
 mvn test -Dtest=ResilientKeyManagementAdapterTest
@@ -2624,7 +2624,7 @@ mvn test jacoco:report
 ### Test Structure
 
 ```
-common-platform-security-vault-core/src/test/java/
+core-common-security-vault-core/src/test/java/
 ├── adapters/
 │   ├── ResilientKeyManagementAdapterTest.java      # 16 tests
 │   ├── InMemoryKeyManagementAdapterTest.java       # 16 tests
@@ -2883,7 +2883,7 @@ We welcome contributions! Here's how to get started:
 ### Quick Start
 
 1. **Fork** the repository
-2. **Clone** your fork: `git clone https://github.com/your-username/common-platform-security-vault.git`
+2. **Clone** your fork: `git clone https://github.com/your-username/core-common-security-vault.git`
 3. **Create** a feature branch: `git checkout -b feature/amazing-feature`
 4. **Make** your changes
 5. **Test** your changes: `mvn test`
@@ -2895,8 +2895,8 @@ We welcome contributions! Here's how to get started:
 
 ```bash
 # Clone the repository
-git clone https://github.com/firefly-oss/common-platform-security-vault.git
-cd common-platform-security-vault
+git clone https://github.com/firefly-oss/core-common-security-vault.git
+cd core-common-security-vault
 
 # Build the project
 mvn clean install
@@ -2905,7 +2905,7 @@ mvn clean install
 mvn test
 
 # Run the application
-cd common-platform-security-vault-web
+cd core-common-security-vault-web
 mvn spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
@@ -2957,8 +2957,8 @@ This project is licensed under the **Apache License 2.0** - see the [LICENSE](LI
 | Resource | Link | Description |
 |----------|------|-------------|
 | **Documentation** | [docs/](./docs) | Comprehensive guides and tutorials |
-| **Issues** | [GitHub Issues](https://github.com/firefly-oss/common-platform-security-vault/issues) | Bug reports and feature requests |
-| **Discussions** | [GitHub Discussions](https://github.com/firefly-oss/common-platform-security-vault/discussions) | Questions and community support |
+| **Issues** | [GitHub Issues](https://github.com/firefly-oss/core-common-security-vault/issues) | Bug reports and feature requests |
+| **Discussions** | [GitHub Discussions](https://github.com/firefly-oss/core-common-security-vault/discussions) | Questions and community support |
 | **Email** | dev@getfirefly.io | Direct support |
 | **Website** | [getfirefly.io](https://getfirefly.io) | Firefly platform information |
 

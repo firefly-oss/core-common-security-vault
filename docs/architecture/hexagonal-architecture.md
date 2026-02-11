@@ -35,7 +35,7 @@ The "hexagon" represents the core application logic, which is:
 
 #### 1. KeyManagementPort (Outbound Port)
 
-**Location**: `common-platform-security-vault-core/src/main/java/com/firefly/common/security/vault/core/ports/KeyManagementPort.java`
+**Location**: `core-common-security-vault-core/src/main/java/com/firefly/common/security/vault/core/ports/KeyManagementPort.java`
 
 **Purpose**: Defines the contract for low-level cryptographic operations with Key Management Services.
 
@@ -77,7 +77,7 @@ enum ProviderType {
 
 #### 2. CredentialEncryptionPort (Outbound Port)
 
-**Location**: `common-platform-security-vault-core/src/main/java/com/firefly/common/security/vault/core/ports/CredentialEncryptionPort.java`
+**Location**: `core-common-security-vault-core/src/main/java/com/firefly/common/security/vault/core/ports/CredentialEncryptionPort.java`
 
 **Purpose**: Defines the contract for high-level credential encryption operations.
 

@@ -137,18 +137,18 @@ Each layer has a specific responsibility:
 The project is organized into Maven modules:
 
 ```
-common-platform-security-vault/
-├── common-platform-security-vault-models/
+core-common-security-vault/
+├── core-common-security-vault-models/
 │   ├── Domain entities (Credential, CredentialType, etc.)
 │   ├── R2DBC repositories
 │   └── Flyway database migrations
 │
-├── common-platform-security-vault-interfaces/
+├── core-common-security-vault-interfaces/
 │   ├── DTOs (Data Transfer Objects)
 │   ├── Request/Response models
 │   └── API contracts
 │
-├── common-platform-security-vault-core/
+├── core-common-security-vault-core/
 │   ├── ports/              # Domain interfaces
 │   ├── adapters/           # Infrastructure implementations
 │   ├── services/           # Business logic
@@ -156,12 +156,12 @@ common-platform-security-vault/
 │   ├── health/             # Health indicators
 │   └── metrics/            # Metrics collectors
 │
-├── common-platform-security-vault-web/
+├── core-common-security-vault-web/
 │   ├── controllers/        # REST API endpoints
 │   ├── exception/          # Exception handlers
 │   └── Application.java    # Spring Boot application
 │
-└── common-platform-security-vault-sdk/
+└── core-common-security-vault-sdk/
     └── Generated client library
 ```
 
