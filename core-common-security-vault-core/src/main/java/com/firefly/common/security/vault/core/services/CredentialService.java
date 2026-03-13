@@ -17,6 +17,7 @@
 
 package com.firefly.common.security.vault.core.services;
 
+import com.firefly.common.security.vault.core.services.access.AccessControlService;
 import com.firefly.common.security.vault.interfaces.dtos.CredentialDTO;
 import org.fireflyframework.core.filters.FilterRequest;
 import org.fireflyframework.core.queries.PaginationResponse;
@@ -63,5 +64,14 @@ public interface CredentialService {
      * @return Void
      */
     Mono<Void> delete(UUID id);
+
+    /**
+     * Decrypt and retrieve credential value (with access control and audit)
+     *
+     * @param id Credential ID
+     * @param accessRequest Access request context
+     * @return Decrypted credential value
+     */
+    Mono<String> getDecryptedValue(UUID id, AccessControlService.AccessRequest accessRequest);
 }
 

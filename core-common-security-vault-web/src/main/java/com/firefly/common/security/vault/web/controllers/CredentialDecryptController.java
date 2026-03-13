@@ -17,8 +17,8 @@
 
 package com.firefly.common.security.vault.web.controllers;
 
+import com.firefly.common.security.vault.core.services.CredentialService;
 import com.firefly.common.security.vault.core.services.access.AccessControlService;
-import com.firefly.common.security.vault.core.services.impl.CredentialServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -40,7 +40,7 @@ import java.util.UUID;
 @Tag(name = "Credential Decryption", description = "API for decrypting secure credentials")
 public class CredentialDecryptController {
 
-    private final CredentialServiceImpl credentialService;
+    private final CredentialService credentialService;
 
     /**
      * POST /api/v1/credentials/:id/decrypt : Decrypt and retrieve credential value

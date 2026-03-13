@@ -189,11 +189,12 @@ public class CredentialServiceImpl implements CredentialService {
 
     /**
      * Decrypt and retrieve credential value (with access control and audit)
-     * 
+     *
      * @param id Credential ID
      * @param accessRequest Access request context
      * @return Decrypted credential value
      */
+    @Override
     public Mono<String> getDecryptedValue(UUID id, AccessControlService.AccessRequest accessRequest) {
         long startTime = System.currentTimeMillis();
         
