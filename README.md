@@ -1,5 +1,5 @@
 <!--
-Copyright 2025 Firefly Software Solutions Inc
+Copyright 2025 Firefly Software Foundation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -3027,5 +3027,5 @@ Learn more at [getfirefly.io](https://getfirefly.io)
 
 ---
 
-**Made with by Firefly Software Solutions Inc**
-Copyright 2025 Firefly Software Solutions Inc. All rights reserved.
+**Made with by Firefly Software Foundation**
+Copyright 2025 Firefly Software Foundation. All rights reserved.

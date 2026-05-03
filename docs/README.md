@@ -110,9 +110,9 @@ If you can't find what you're looking for:
 
 ---
 
-**Made with by Firefly Software Solutions Inc**
+**Made with by Firefly Software Foundation**
 
-Copyright 2025 Firefly Software Solutions Inc. All rights reserved.
+Copyright 2025 Firefly Software Foundation. All rights reserved.
 
 **Last Updated**: October 31, 2025
 **Version**: 1.0.0-SNAPSHOT
